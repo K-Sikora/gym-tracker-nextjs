@@ -1,8 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 body {
-  background-color: rgb(20, 20, 20);
-  color: white;
+  background-color: #eeeff1;
+  color: black;
+  font-family: Montserrat;
+}
+.cover {
+  background-image: url("../../public/images/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }

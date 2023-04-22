@@ -20,7 +20,7 @@ export default function register(req, res) {
 
           if (results.length > 0) {
             // User already exists
-            res.status(409).json({ message: "Użytkownik już istnieje" });
+            res.status(409).json({ message: "User already exists" });
           } else {
             // Adding new user to database
             dbPool.query(

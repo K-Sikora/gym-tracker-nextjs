@@ -24,7 +24,7 @@ export default function login(req, res) {
           if (result === true) {
             res.status(200).json({ Message: "Login Successful" });
           } else {
-            res.status(402).json({ Message: "Invalid Credentials" });
+            res.status(401).json({ Message: "Invalid Credentials" });
           }
         });
       } else {
