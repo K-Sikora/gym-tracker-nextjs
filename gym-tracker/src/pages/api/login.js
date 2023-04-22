@@ -28,7 +28,6 @@ export default function login(req, res) {
           }
         });
       } else {
-        console.log("match");
         res.status(401).json({ Message: "Invalid Credentials" });
       }
     }

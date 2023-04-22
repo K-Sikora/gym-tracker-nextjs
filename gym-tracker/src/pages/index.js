@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import Typewriter from "typewriter-effect";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 const index = () => {
+  const router = useRouter();
   const [registerVisible, setRegisterVisible] = useState(false);
   const [isErrorRegister, setIsErrorRegister] = useState(false);
   const [isErrorLogin, setIsErrorLogin] = useState(false);
@@ -28,23 +31,40 @@ const index = () => {
       }
     }
   };
+  // try {
+  //   const response = await axios.post("/api/login", {
+  //     emailLogin,
+  //     passwordLogin,
+  //   });
+  //   if (response.status === 200) {
+  //     console.log("login successfully");
+  //     setIsErrorLogin(false);
+  //   }
+  // } catch (error) {
+  //   if (error.response && error.response.status === 401) {
+  //     setIsErrorLogin(true);
+  //   } else {
+  //     console.error("Error ocurred", error);
+  //   }
+  // }
   const handleLogin = async (e) => {
-    try {
-      const response = await axios.post("/api/login", {
-        emailLogin,
-        passwordLogin,
+    const result = await signIn("credentials", {
+      username: emailLogin,
+      password: passwordLogin,
+      redirect: false,
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.ok) {
+          //authenticate user
+          console.log("dziala");
+          // router.push("/dashboard");
+        }
+      })
+      .catch((error) => {
+        // handle errors
+        console.log(error);
       });
-      if (response.status === 200) {
-        console.log("login successfully");
-        setIsErrorLogin(false);
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setIsErrorLogin(true);
-      } else {
-        console.error("Error ocurred", error);
-      }
-    }
   };
   return (
     <section className="flex h-screen w-full  ">
@@ -98,7 +118,7 @@ const index = () => {
                 className="flex flex-col items-end gap-8 md:w-96 w-full justify-center border-b-[2px] border-gray-300 pb-8"
               >
                 <input
-                  required
+                  // required
                   onChange={(e) => {
                     setEmailLogin(e.target.value);
                   }}
@@ -107,7 +127,7 @@ const index = () => {
                   placeholder="E-mail"
                 ></input>
                 <input
-                  required
+                  // required
                   onChange={(e) => {
                     setPasswordLogin(e.target.value);
                   }}
@@ -170,7 +190,7 @@ const index = () => {
               >
                 <input
                   autoFocus
-                  required
+                  // required
                   onChange={(e) => {
                     setEmailRegister(e.target.value);
                   }}
@@ -179,7 +199,7 @@ const index = () => {
                   placeholder="E-mail"
                 ></input>
                 <input
-                  required
+                  // required
                   onChange={(e) => {
                     setPasswordRegister(e.target.value);
                   }}
