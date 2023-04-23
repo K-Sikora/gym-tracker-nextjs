@@ -6,6 +6,10 @@ export const authOptions = {
   pages: {
     signIn: "/",
   },
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
+  },
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -18,9 +22,7 @@ export const authOptions = {
             (err, results) => {
               if (err) {
                 console.log(err);
-                return res
-                  .status(500)
-                  .json({ Message: "Internal Server Error" });
+                return reject({ Message: "Internal Server Error" });
               }
               if (results && results.length > 0) {
                 const userDb = results[0];
@@ -30,25 +32,23 @@ export const authOptions = {
                   (err, result) => {
                     if (err) {
                       console.log(err);
-                      return res
-                        .status(500)
-                        .json({ Message: "Internal Server Error" });
+                      return reject({ Message: "Internal Server Error" });
                     }
                     if (result === true) {
                       return resolve({
-                        user: {
-                          name: credentials.username,
-                        },
+                        name: userDb.id,
+                        email: credentials.username,
                       });
                     } else {
-                      return res
-                        .status(401)
-                        .json({ Message: "Invalid Credentials" });
+                      return reject({
+                        code: 401,
+                        message: "Invalid Password",
+                      });
                     }
                   }
                 );
               } else {
-                return res.status(401).json({ Message: "Invalid Credentials" });
+                return reject({ code: 401, message: "Invalid E-mail" });
               }
             }
           );
