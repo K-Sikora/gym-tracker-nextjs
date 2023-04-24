@@ -14,7 +14,7 @@ const Navbar = () => {
   const { data, status } = useSession();
   const router = useRouter();
   return (
-    <header className="h-20 px-8 text-white flex w-full items-center justify-between bg-[#2E1C2B]">
+    <header className="h-20 px-8 text-white flex w-full items-center justify-between bg-dark">
       <div className="max-w-5xl mx-auto w-full flex gap-14 items-center justify-start">
         <button
           onBlur={() => {
@@ -23,7 +23,7 @@ const Navbar = () => {
           onClick={() => {
             setpanelVisible(!panelVisible);
           }}
-          className="w-12 h-12  relative shadow-lg shadow-[#893168]/20  flex items-center justify-center  rounded-full bg-[#893168]"
+          className="w-12 h-12 z-50 relative shadow-lg shadow-primary/20  flex items-center justify-center  rounded-full bg-primary"
         >
           <p className="pointer-events-none font-bold text-base flex items-center justify-center">
             {data && data.user.email.slice(0, 1).toUpperCase()}
@@ -39,21 +39,21 @@ const Navbar = () => {
                 className="absolute -bottom-28 py-1  text-base rounded-md items-start font-medium  left-0 flex flex-col bg-black px-3 "
               >
                 <span className="flex group  items-center py-1 justify-center gap-2">
-                  <FaUserAlt className=" group-hover:text-[#893168] duration-500" />
+                  <FaUserAlt className=" group-hover:text-primary duration-500" />
                   {data.user.email}
                 </span>
                 <a
                   href="/"
                   className="flex py-1 items-center  group justify-center gap-2"
                 >
-                  <RiDashboardFill className=" group-hover:text-[#893168] duration-500" />{" "}
+                  <RiDashboardFill className=" group-hover:text-primary duration-500" />{" "}
                   Dashboard
                 </a>
                 <a
                   onClick={signOut}
                   className="flex group py-1  items-center justify-center gap-2"
                 >
-                  <GoSignOut className=" group-hover:text-[#893168] duration-500" />
+                  <GoSignOut className=" group-hover:text-primary duration-500" />
                   Sign out
                 </a>
               </motion.div>
@@ -64,9 +64,9 @@ const Navbar = () => {
           <ul className="flex gap-10 text-base font-medium">
             <Link href="/">
               <li
-                className={`flex cursor-pointer justify-center items-center gap-2 hover:border-[#FFF07C] ${
+                className={`flex cursor-pointer justify-center items-center gap-2 hover:border-accent ${
                   router.pathname === "/"
-                    ? "border-[#FFF07C] "
+                    ? "border-accent "
                     : "border-transparent"
                 } duration-300 text-base border-b-[3px] px-2 py-2`}
               >
@@ -78,9 +78,9 @@ const Navbar = () => {
               <li
                 className={`flex cursor-pointer ${
                   router.pathname === "/exercises"
-                    ? "border-[#FFF07C] "
+                    ? "border-accent "
                     : "border-transparent"
-                } hover:border-[#FFF07C]  duration-300 justify-center items-center gap-2 text-base border-b-[3px]  px-2 py-2`}
+                } hover:border-accent  duration-300 justify-center items-center gap-2 text-base border-b-[3px]  px-2 py-2`}
               >
                 <MdSportsGymnastics />
                 Exercises
@@ -88,9 +88,9 @@ const Navbar = () => {
             </Link>
             <Link href="/schemas">
               <li
-                className={`flex cursor-pointer hover:border-[#FFF07C] duration-300 justify-center items-center gap-2 text-base border-b-[3px] ${
+                className={`flex cursor-pointer hover:border-accent duration-300 justify-center items-center gap-2 text-base border-b-[3px] ${
                   router.pathname === "/schemas"
-                    ? "border-[#FFF07C] "
+                    ? "border-accent "
                     : "border-transparent"
                 } px-2 py-2`}
               >
@@ -100,9 +100,9 @@ const Navbar = () => {
             </Link>
             <Link href="/profile">
               <li
-                className={`flex cursor-pointer hover:border-[#FFF07C] duration-300 justify-center items-center gap-2 text-base border-b-[3px] ${
+                className={`flex cursor-pointer hover:border-accent duration-300 justify-center items-center gap-2 text-base border-b-[3px] ${
                   router.pathname === "/profile"
-                    ? "border-[#FFF07C] "
+                    ? "border-accent "
                     : "border-transparent"
                 } px-2 py-2`}
               >

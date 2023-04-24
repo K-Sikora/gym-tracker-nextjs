@@ -108,7 +108,7 @@ const index = () => {
                   inputRef.current.focus();
                 }
               }}
-              className="bg-[#893168] text-white shadow-[#893168]/30 rounded-full text-base font-semibold shadow-lg py-2 mt-10 w-52  "
+              className="bg-primary text-white shadow-primary/30 rounded-full text-base font-semibold shadow-lg py-2 mt-10 w-52  "
             >
               Join now
             </button>
@@ -146,7 +146,7 @@ const index = () => {
                     onChange={(e) => {
                       setEmailLogin(e.target.value);
                     }}
-                    className="px-3 bg-gray-50 text-black border-[1px] outline-none focus:outline-[#893168] -outline-offset-2 font-medium text-base border-[#893168]/60 py-2 w-full rounded-sm"
+                    className="px-3 bg-gray-50 text-black border-[1px] outline-none focus:outline-primary -outline-offset-2 font-medium text-base border-primary/60 py-2 w-full rounded-sm"
                     type="email"
                     placeholder="E-mail"
                   ></input>
@@ -155,7 +155,7 @@ const index = () => {
                     onChange={(e) => {
                       setPasswordLogin(e.target.value);
                     }}
-                    className="px-3 border-[1px] bg-gray-50 text-black outline-none focus:outline-[#893168] -outline-offset-2 font-medium text-base border-[#893168]/60  py-2 w-full rounded-sm"
+                    className="px-3 border-[1px] bg-gray-50 text-black outline-none focus:outline-primary -outline-offset-2 font-medium text-base border-primary/60  py-2 w-full rounded-sm"
                     type="password"
                     placeholder="Password"
                   ></input>
@@ -177,7 +177,7 @@ const index = () => {
                     <input
                       type="submit"
                       value={"Sign in"}
-                      className="bg-[#893168] hover:shadow-[#893168]/60 duration-300 cursor-pointer text-white shadow-[#893168]/40 rounded-full font-medium shadow-lg py-2 w-40 md:w-1/2 "
+                      className="bg-primary hover:shadow-primary/60 duration-300 cursor-pointer text-white shadow-primary/40 rounded-full font-medium shadow-lg py-2 w-40 md:w-1/2 "
                     ></input>
                   </div>
                 </form>
@@ -190,7 +190,7 @@ const index = () => {
                       setRegisterVisible(true);
                       setPasswordRegister("");
                     }}
-                    className="text-black rounded-full font-medium border-2 border-[#893168] py-2 w-40 md:w-1/2 "
+                    className="text-black rounded-full font-medium border-2 border-primary py-2 w-40 md:w-1/2 "
                   >
                     Sign up
                   </button>
@@ -229,7 +229,7 @@ const index = () => {
                     onChange={(e) => {
                       setEmailRegister(e.target.value);
                     }}
-                    className="px-3 bg-gray-50 text-black border-[1px] outline-none focus:outline-[#893168] -outline-offset-2 font-medium text-base border-[#893168]/60  py-2 w-full rounded-sm"
+                    className="px-3 bg-gray-50 text-black border-[1px] outline-none focus:outline-primary -outline-offset-2 font-medium text-base border-primary/60  py-2 w-full rounded-sm"
                     type="email"
                     placeholder="E-mail"
                   ></input>
@@ -239,7 +239,7 @@ const index = () => {
                     onChange={(e) => {
                       setPasswordRegister(e.target.value);
                     }}
-                    className="px-3 bg-gray-50 text-black border-[1px] outline-none focus:outline-[#893168] -outline-offset-2 font-medium text-base border-[#893168]/60  py-2 w-full rounded-sm"
+                    className="px-3 bg-gray-50 text-black border-[1px] outline-none focus:outline-primary -outline-offset-2 font-medium text-base border-primary/60  py-2 w-full rounded-sm"
                     type="password"
                     placeholder="Password"
                   ></input>
@@ -249,7 +249,7 @@ const index = () => {
                     onChange={(e) => {
                       setPasswordRegister2(e.target.value);
                     }}
-                    className="px-3 bg-gray-50 text-black border-[1px] outline-none focus:outline-[#893168] -outline-offset-2 font-medium text-base border-[#893168]/60  py-2 w-full rounded-sm"
+                    className="px-3 bg-gray-50 text-black border-[1px] outline-none focus:outline-primary -outline-offset-2 font-medium text-base border-primary/60  py-2 w-full rounded-sm"
                     type="password"
                     placeholder="Re-enter password"
                   ></input>
@@ -323,7 +323,7 @@ const index = () => {
                     <input
                       type="submit"
                       value={"Sign up"}
-                      className="bg-[#893168] cursor-pointer hover:shadow-[#893168]/60 duration-300 text-white shadow-[#893168]/40 rounded-full font-medium shadow-lg py-2 w-40 md:w-1/2 "
+                      className="bg-primary cursor-pointer hover:shadow-primary/60 duration-300 text-white shadow-primary/40 rounded-full font-medium shadow-lg py-2 w-40 md:w-1/2 "
                     ></input>
                   </div>
                 </form>
@@ -336,7 +336,7 @@ const index = () => {
                       setRegisterVisible(false);
                       setPasswordRegister("");
                     }}
-                    className="text-black rounded-full font-medium border-2 border-[#893168] py-2 w-40 md:w-1/2 "
+                    className="text-black rounded-full font-medium border-2 border-primary py-2 w-40 md:w-1/2 "
                   >
                     Sign in
                   </button>

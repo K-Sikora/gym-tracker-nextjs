@@ -12,14 +12,14 @@ const Workouts = (props) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
-          className="min-h-screen border-4 rounded-xl mt-10 border=[#4A1942]"
+          className="min-h-screen border-4 rounded-sm mt-10 border=secondary"
         >
           {noWorkouts ? (
             <div className="flex items-center justify-center flex-col gap-4">
               <h2 className=" text-2xl pt-10 font-semibold">
                 You don't have any workouts
               </h2>
-              <button className="text-xl flex items-center group text-[#4A1942] justify-center gap-2 font-medium">
+              <button className="text-xl flex items-center group text-secondary justify-center gap-2 font-medium">
                 <FaPlusCircle className=" group-hover:scale-125 " />
                 Add a workout
               </button>
