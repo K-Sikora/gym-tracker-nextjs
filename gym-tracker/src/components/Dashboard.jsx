@@ -2,22 +2,23 @@ import React from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/Layout";
-const dashboard = () => {
+import Workouts from "./Workouts";
+const Dashboard = () => {
   const { data: session } = useSession({
     required: true,
   });
-  if (!session) {
-    return <></>;
-  }
+
   console.log(session);
   return (
-    <>
+    <div className="w-full">
       <Navbar />
       <Layout>
-        <div>CONTENT</div>
+        <div>
+          <Workouts />
+        </div>
       </Layout>
-    </>
+    </div>
   );
 };
 
-export default dashboard;
+export default Dashboard;

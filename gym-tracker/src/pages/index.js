@@ -4,13 +4,14 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { FaUserAlt } from "react-icons/fa";
+
 import { GoSignOut } from "react-icons/go";
 import { RiDashboardFill } from "react-icons/ri";
 import { VscTriangleUp } from "react-icons/vsc";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import Navbar from "@/components/Navbar";
 import Layout from "@/components/Layout";
+import Dashboard from "@/components/Dashboard";
 const index = () => {
   const inputRef = useRef(null);
   const router = useRouter();
@@ -114,12 +115,7 @@ const index = () => {
           </div>
         </div>
       )}
-      {status === "authenticated" && (
-        <div className="w-full">
-          <Navbar />
-          <div>CONTENT</div>
-        </div>
-      )}
+      {status === "authenticated" && <Dashboard />}
 
       {status === "unauthenticated" && (
         <div className="md:w-1/2  w-full flex items-center justify-center h-full flex-grow flex-col ">
