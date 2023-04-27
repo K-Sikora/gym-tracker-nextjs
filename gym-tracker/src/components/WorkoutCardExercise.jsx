@@ -6,8 +6,8 @@ const WorkoutCardExercise = () => {
         src="./exercises/barbell-bench-press.jpg"
         className="rounded-full w-14 h-14"
       ></img>
-      <div className="flex flex-col text-sm font-medium justify-center  ">
-        <span>Barbell bench press</span>
+      <div className="flex flex-col text-xs font-medium justify-center  ">
+        <span className="text-sm">Barbell bench press</span>
         <span>5 Sets</span>
         <span>Reps: 12, 12, 12, 12, 12</span>
       </div>

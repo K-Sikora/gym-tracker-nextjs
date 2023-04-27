@@ -5,7 +5,10 @@ import { GoSignOut } from "react-icons/go";
 import { RiDashboardFill } from "react-icons/ri";
 import { MdSportsGymnastics } from "react-icons/md";
 import { useRouter } from "next/router";
-import { BiDumbbell } from "react-icons/bi";
+import { FaCalendarCheck } from "react-icons/fa";
+
+import { BiMenuAltLeft } from "react-icons/bi";
+import { CgGym } from "react-icons/cg";
 import { FaCalendarPlus, FaUserAlt } from "react-icons/fa";
 import Link from "next/link";
 const Navbar = () => {
@@ -14,8 +17,8 @@ const Navbar = () => {
   const { data, status } = useSession();
   const router = useRouter();
   return (
-    <header className="h-20 px-8 text-white flex w-full items-center justify-between bg-dark">
-      <div className="max-w-5xl mx-auto w-full flex gap-14 items-center justify-start">
+    <header className="md:h-20 h-16 md:px-8 px-4 text-white flex w-full items-center justify-between bg-dark">
+      <div className="max-w-5xl mx-auto w-full  flex gap-6 md:gap-7 items-center justify-start">
         <button
           onBlur={() => {
             setpanelVisible(false);
@@ -23,7 +26,7 @@ const Navbar = () => {
           onClick={() => {
             setpanelVisible(!panelVisible);
           }}
-          className="w-12 h-12 z-50 relative shadow-lg shadow-primary/20  flex items-center justify-center  rounded-full bg-primary"
+          className=" hidden md:flex  w-10 h-10 z-50 relative shadow-lg shadow-primary/20   items-center justify-center  rounded-full bg-primary"
         >
           <p className="pointer-events-none font-bold text-base flex items-center justify-center">
             {data && data.user.email.slice(0, 1).toUpperCase()}
@@ -60,8 +63,8 @@ const Navbar = () => {
             )}
           </AnimatePresence>
         </button>
-        <nav className="hidden md:block">
-          <ul className="flex gap-10 text-base font-medium">
+        <nav className="hidden md:flex items-center">
+          <ul className="flex gap-7 text-base font-medium">
             <Link href="/">
               <li
                 className={`flex cursor-pointer justify-center items-center gap-2 hover:border-accent ${
@@ -70,7 +73,7 @@ const Navbar = () => {
                     : "border-transparent"
                 } duration-300 text-base border-b-[3px] px-2 py-2`}
               >
-                <FaCalendarPlus />
+                <FaCalendarCheck />
                 Workouts
               </li>
             </Link>
@@ -82,7 +85,7 @@ const Navbar = () => {
                     : "border-transparent"
                 } hover:border-accent  duration-300 justify-center items-center gap-2 text-base border-b-[3px]  px-2 py-2`}
               >
-                <MdSportsGymnastics />
+                <MdSportsGymnastics className="text-lg" />
                 Exercises
               </li>
             </Link>
@@ -94,8 +97,20 @@ const Navbar = () => {
                     : "border-transparent"
                 } px-2 py-2`}
               >
-                <BiDumbbell />
+                <CgGym className="text-lg" />
                 Schemas
+              </li>
+            </Link>
+            <Link href="/add">
+              <li
+                className={`flex cursor-pointer hover:border-accent duration-300 justify-center items-center gap-2 text-base border-b-[3px] ${
+                  router.pathname === "/add"
+                    ? "border-accent "
+                    : "border-transparent"
+                } px-2 py-2`}
+              >
+                <FaCalendarCheck />
+                Add
               </li>
             </Link>
             <Link href="/profile">
@@ -108,6 +123,90 @@ const Navbar = () => {
               >
                 <FaUserAlt />
                 Profile
+              </li>
+            </Link>
+          </ul>
+        </nav>
+        <button className="md:hidden">
+          <BiMenuAltLeft className="text-3xl" />
+        </button>
+        <nav className="flex items-center  md:hidden">
+          <ul className="flex items-center gap-5 text-base font-medium">
+            <Link
+              className="hover:text-accent duration-300"
+              href="/"
+            >
+              <li
+                className={`flex cursor-pointer justify-center items-center gap-2 text-base  px-2 py-2`}
+              >
+                <FaCalendarCheck
+                  className={`
+                duration-300
+              ${router.pathname === "/" ? "text-accent " : ""}
+              
+              `}
+                />
+              </li>
+            </Link>
+            <Link
+              className="hover:text-accent duration-300"
+              href="/exercises"
+            >
+              <li
+                className="flex cursor-pointer 
+                      justify-center items-center gap-2 text-lg px-2 py-2"
+              >
+                <MdSportsGymnastics
+                  className={`
+                duration-300
+              ${router.pathname === "/exercises" ? "text-accent " : ""}
+              
+              `}
+                />
+              </li>
+            </Link>
+            <Link
+              className="hover:text-accent duration-300"
+              href="/schemas"
+            >
+              <li
+                className={`flex cursor-pointer    duration-300 justify-center items-center gap-2 text-lg   px-2 py-2`}
+              >
+                <CgGym
+                  className={`
+                duration-300
+              ${router.pathname === "/schemas" ? "text-accent " : ""}
+              
+              `}
+                />
+              </li>
+            </Link>
+            <Link
+              className="hover:text-accent duration-300"
+              href="/add"
+            >
+              <li className="flex cursor-pointer  duration-300 justify-center items-center gap-2 text-base   px-2 py-2">
+                <FaCalendarPlus
+                  className={`
+                  duration-300
+                ${router.pathname === "/add" ? "text-accent " : ""}
+                
+                `}
+                />
+              </li>
+            </Link>
+            <Link
+              className="hover:text-accent duration-300"
+              href="/profile"
+            >
+              <li className="flex cursor-pointer  duration-300 justify-center items-center gap-2 text-base   px-2 py-2">
+                <FaUserAlt
+                  className={`
+                  duration-300
+                ${router.pathname === "/profile" ? "text-accent " : ""}
+                
+                `}
+                />
               </li>
             </Link>
           </ul>

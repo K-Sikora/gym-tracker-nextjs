@@ -5,14 +5,14 @@ import WorkoutCard from "./WorkoutCard";
 const Workouts = (props) => {
   const [noWorkouts, setnoWorkouts] = useState(false);
   return (
-    <div>
+    <div className="md:pb-8 ">
       <AnimatePresence>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
-          className="min-h-screen border-4 rounded-sm mt-10 border=secondary"
+          className="min-h-screen md:border-2 rounded-sm  md:mt-10 border-secondary/10"
         >
           {noWorkouts ? (
             <div className="flex items-center justify-center flex-col gap-4">
@@ -25,7 +25,9 @@ const Workouts = (props) => {
               </button>
             </div>
           ) : (
-            <div>
+            <div className="flex md:py-4 flex-col md:gap-4">
+              <WorkoutCard />
+              <WorkoutCard />
               <WorkoutCard />
             </div>
           )}
