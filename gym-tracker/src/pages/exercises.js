@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MoonLoader } from "react-spinners";

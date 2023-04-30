@@ -4,19 +4,12 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-
-import { GoSignOut } from "react-icons/go";
-import { RiDashboardFill } from "react-icons/ri";
-import { VscTriangleUp } from "react-icons/vsc";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
-import Navbar from "@/components/Navbar";
-import Layout from "@/components/Layout";
 import Dashboard from "@/components/Dashboard";
 const index = () => {
   const inputRef = useRef(null);
   const router = useRouter();
   const { status, data } = useSession();
-  const [panelVisible, setpanelVisible] = useState(false);
   const [registerVisible, setRegisterVisible] = useState(false);
   const [isErrorRegister, setIsErrorRegister] = useState(false);
   const [isWrongPassword, setIsWrongPassword] = useState(false);
@@ -118,7 +111,7 @@ const index = () => {
       {status === "authenticated" && <Dashboard />}
 
       {status === "unauthenticated" && (
-        <div className="md:w-1/2  w-full flex items-center justify-center h-full flex-grow flex-col ">
+        <div className="md:w-1/2 bg-light  w-full flex items-center justify-center h-full flex-grow flex-col ">
           <AnimatePresence>
             {!registerVisible && (
               <motion.div

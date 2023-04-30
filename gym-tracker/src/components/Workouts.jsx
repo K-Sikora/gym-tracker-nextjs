@@ -25,7 +25,7 @@ const Workouts = (props) => {
               </button>
             </div>
           ) : (
-            <div className="flex md:py-4 flex-col md:gap-4">
+            <div className="flex md:py-4 border-2 border-white/10 rounded-lg flex-col md:gap-4">
               <WorkoutCard />
               <WorkoutCard />
               <WorkoutCard />

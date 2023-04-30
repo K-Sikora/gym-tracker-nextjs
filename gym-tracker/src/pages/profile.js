@@ -1,17 +1,15 @@
 import Layout from "@/components/Layout";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { MoonLoader } from "react-spinners";
+import Loader from "@/components/Loader";
 const profile = (props) => {
   return (
     <div>
       <Navbar />
       <Layout>
         {props.isLoading ? (
-          <div className="w-full h-screen flex items-center justify-center">
-            <MoonLoader color="#893168" />
-          </div>
+          <Loader />
         ) : (
           <AnimatePresence>
             <motion.div

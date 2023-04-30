@@ -6,11 +6,11 @@ const WorkoutCard = () => {
   const { data } = useSession();
   return (
     <div className="w-full md:px-4  text-white">
-      <div className="bg-[#271925] md:rounded-lg border-b-2  border-primary/20  md:border-none shadow-md shadow-black/10 p-4 py-7 md:p-5">
+      <div className="bg-dark md:rounded-lg border-b-2  border-primary/20  md:border-none shadow-md shadow-black/10 p-4 py-7 md:p-5">
         <div className="flex justify-between">
           <div className="flex gap-4 items-center">
-            <button className="md:w-12 h-10 md:h-12 w-10 relative shadow-lg shadow-primary/20  flex items-center justify-center  rounded-full bg-primary">
-              <p className="pointer-events-none font-bold text-sm md:text-base flex items-center justify-center">
+            <button className="h-8 w-8 relative shadow-lg shadow-primary/20  flex items-center justify-center  rounded-full bg-primary">
+              <p className="pointer-events-none font-bold text-xs md:text-sm flex items-center justify-center">
                 {data && data.user.email.slice(0, 1).toUpperCase()}
               </p>
             </button>
