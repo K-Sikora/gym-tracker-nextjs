@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import ExerciseSet from "./ExerciseSet";
 import { Combobox, Transition } from "@headlessui/react";
 
@@ -25,6 +25,7 @@ const exercises = [
 ];
 const Exercise = (props) => {
   const [selected, setSelected] = useState(exercises[0]);
+
   const [query, setQuery] = useState("");
   const filteredExercises =
     query === ""
@@ -36,7 +37,27 @@ const Exercise = (props) => {
             .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
   const [currentSets, setcurrentSets] = useState(1);
+  useEffect(() => {
+    const id = props.exerciseNumber;
+    props.setSelectedExercise((prevSelectedExercise) => {
+      const exerciseIndex = prevSelectedExercise.findIndex(
+        (exercise) => exercise.id === id
+      );
 
+      if (exerciseIndex === -1) {
+        return [...prevSelectedExercise, { id, selected, sets: currentSets }];
+      }
+
+      const updatedExercise = {
+        ...prevSelectedExercise[exerciseIndex],
+        selected,
+        sets: currentSets,
+      };
+      const updatedSelectedExercise = [...prevSelectedExercise];
+      updatedSelectedExercise[exerciseIndex] = updatedExercise;
+      return updatedSelectedExercise;
+    });
+  }, [selected, currentSets]);
   const sets = [];
   for (let i = 0; i < currentSets; i++) {
     sets.push(
@@ -141,9 +162,11 @@ const Exercise = (props) => {
           ></input>
           <button
             onClick={() => {
-              setcurrentSets(currentSetsValue);
+              if (currentSetsValue > 0 && currentSetsValue < 20) {
+                setcurrentSets(currentSetsValue);
+              }
             }}
-            className="bg-primary font-medium rounded-md px-2 py-1 text-sm"
+            className="bg-primary font-medium rounded-md px-4 py-1 text-sm"
           >
             Update sets
           </button>
