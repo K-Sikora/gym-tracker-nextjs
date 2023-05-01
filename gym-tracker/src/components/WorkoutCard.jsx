@@ -6,7 +6,7 @@ const WorkoutCard = () => {
   const { data } = useSession();
   return (
     <div className="w-full md:px-4  text-white">
-      <div className="bg-dark md:rounded-lg border-b-2  border-primary/20  md:border-none shadow-md shadow-black/10 p-4 py-7 md:p-5">
+      <div className="bg-secondary md:rounded-lg border-b-2  border-primary/20  md:border-none shadow-md shadow-black/10 p-4 py-7 md:p-5">
         <div className="flex justify-between">
           <div className="flex gap-4 items-center">
             <button className="h-8 w-8 relative shadow-lg shadow-primary/20  flex items-center justify-center  rounded-full bg-primary">

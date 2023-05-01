@@ -53,7 +53,7 @@ const Exercise = (props) => {
   return (
     <div
       data-exercise-id={props.exerciseNumber}
-      className="flex flex-col rounded-lg p-2 shadow-lg shadow-accent/10 py-4 bg-secondary "
+      className="flex flex-col rounded-md p-2 py-4 bg-secondary shadow-md shadow-dark/20  "
     >
       <span className="text-base mb-4 font-medium  text-center">
         Exercise {props.exerciseNumber}
@@ -65,13 +65,13 @@ const Exercise = (props) => {
           onChange={setSelected}
         >
           <div className="relative mb-4">
-            <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+            <div className="relative w-full rounded-lg bg-primary cursor-default overflow-hidden  text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
               <Combobox.Input
-                className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+                className="w-full border-none py-2  pl-3 pr-10 text-sm leading-5 bg-transparent  text-white font-medium focus:ring-0"
                 displayValue={(exercise) => exercise.name}
                 onChange={(event) => setQuery(event.target.value)}
               />
-              <Combobox.Button className="absolute inset-y-0 right-0 flex  items-center pr-2">
+              <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
                 <BiChevronUp
                   className="h-5 w-5 text-gray-400"
                   aria-hidden="true"
@@ -113,7 +113,7 @@ const Exercise = (props) => {
                           {selected ? (
                             <span
                               className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                active ? "text-white" : "text-secondary"
+                                active ? "text-white" : "text-dark"
                               }`}
                             >
                               <BiCheck
@@ -143,7 +143,7 @@ const Exercise = (props) => {
             onClick={() => {
               setcurrentSets(currentSetsValue);
             }}
-            className="bg-primary rounded-md px-2 py-1 text-sm"
+            className="bg-primary font-medium rounded-md px-2 py-1 text-sm"
           >
             Update sets
           </button>
