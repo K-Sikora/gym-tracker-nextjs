@@ -25,7 +25,9 @@ const exercises = [
 ];
 const Exercise = (props) => {
   const [selected, setSelected] = useState(exercises[0]);
-
+  const sets = [];
+  const [reps, setReps] = useState([]);
+  const [weight, setWeight] = useState([]);
   const [query, setQuery] = useState("");
   const filteredExercises =
     query === ""
@@ -38,30 +40,41 @@ const Exercise = (props) => {
         );
   const [currentSets, setcurrentSets] = useState(1);
   useEffect(() => {
+    console.log(reps);
     const id = props.exerciseNumber;
     props.setSelectedExercise((prevSelectedExercise) => {
       const exerciseIndex = prevSelectedExercise.findIndex(
         (exercise) => exercise.id === id
       );
 
+      const newSets = Array.from({ length: currentSets }, (_, index) => ({
+        setNumber: index + 1,
+        reps: reps[index],
+        weight: weight[index],
+      }));
+
       if (exerciseIndex === -1) {
-        return [...prevSelectedExercise, { id, selected, sets: currentSets }];
+        return [...prevSelectedExercise, { id, selected, sets: newSets }];
       }
 
       const updatedExercise = {
         ...prevSelectedExercise[exerciseIndex],
         selected,
-        sets: currentSets,
+        sets: newSets,
       };
       const updatedSelectedExercise = [...prevSelectedExercise];
       updatedSelectedExercise[exerciseIndex] = updatedExercise;
       return updatedSelectedExercise;
     });
-  }, [selected, currentSets]);
-  const sets = [];
+  }, [selected, currentSets, reps, weight]);
+
   for (let i = 0; i < currentSets; i++) {
     sets.push(
       <ExerciseSet
+        reps={reps}
+        weight={weight}
+        setReps={setReps}
+        setWeight={setWeight}
         currentSets={currentSets}
         setcurrentSets={setcurrentSets}
         exerciseId={props.exerciseNumber}
