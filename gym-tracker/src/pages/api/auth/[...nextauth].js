@@ -1,8 +1,9 @@
 import NextAuth from "next-auth";
-import dbPool from "../../../connection.js";
 import bcrypt from "bcrypt";
 import CredentialsProvider from "next-auth/providers/credentials";
-export const authOptions = {
+import prisma from "../../../connection";
+
+const authOptions = {
   pages: {
     signIn: "/",
   },
@@ -15,44 +16,29 @@ export const authOptions = {
       name: "Credentials",
 
       async authorize(credentials, req) {
-        return new Promise((resolve, reject) => {
-          dbPool.query(
-            "SELECT * FROM users WHERE email = ?",
-            [credentials.username],
-            (err, results) => {
-              if (err) {
-                console.log(err);
-                return reject({ Message: "Internal Server Error" });
-              }
-              if (results && results.length > 0) {
-                const userDb = results[0];
-                bcrypt.compare(
-                  credentials.password,
-                  userDb.password,
-                  (err, result) => {
-                    if (err) {
-                      console.log(err);
-                      return reject({ Message: "Internal Server Error" });
-                    }
-                    if (result === true) {
-                      return resolve({
-                        name: userDb.id,
-                        email: credentials.username,
-                      });
-                    } else {
-                      return reject({
-                        code: 401,
-                        message: "Invalid Password",
-                      });
-                    }
-                  }
-                );
-              } else {
-                return reject({ code: 401, message: "Invalid E-mail" });
-              }
-            }
-          );
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials.username,
+          },
         });
+
+        if (!user) {
+          throw new Error("Invalid E-mail");
+        }
+
+        const passwordMatches = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
+
+        if (!passwordMatches) {
+          throw new Error("Invalid Password");
+        }
+
+        return {
+          name: user.id,
+          email: user.email,
+        };
       },
     }),
   ],

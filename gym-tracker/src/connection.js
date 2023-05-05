@@ -1,11 +1,12 @@
-const mysql = require("mysql2");
+import { PrismaClient } from "@prisma/client";
+let prisma;
 
-const dbPool = mysql.createPool({
-  connectionLimit: 10,
-  host: "localhost",
-  user: "root",
-  password: process.env.db_password,
-  database: "gym_tracker",
-});
-
-module.exports = dbPool;
+if (process.env.NODE_ENV === "production") {
+  prisma = new PrismaClient();
+} else {
+  if (!global.prisma) {
+    global.prisma = new PrismaClient();
+  }
+  prisma = global.prisma;
+}
+module.exports = prisma;

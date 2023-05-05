@@ -4,7 +4,7 @@ import { FaPlusCircle } from "react-icons/fa";
 import WorkoutCard from "./WorkoutCard";
 import Link from "next/link";
 const Workouts = (props) => {
-  const [noWorkouts, setnoWorkouts] = useState(true);
+  const [noWorkouts, setnoWorkouts] = useState(false);
   return (
     <div className="md:pb-8 ">
       <AnimatePresence>
@@ -21,14 +21,16 @@ const Workouts = (props) => {
                 You don't have any workouts
               </h2>
               <Link href="/add">
-                <button className="text-xl flex items-center group text-dark justify-center gap-2 font-medium">
-                  <FaPlusCircle className="group-hover:scale-150 text-primary" />
-                  Add a workout
+                <button className="text-xl  duration-1000 flex items-center group hover:text-dark justify-center gap-2 font-medium">
+                  <FaPlusCircle className=" text-primary" />
+                  <span className=" effect-shine text-secondary hover:text-primary transition-colors duration-1000">
+                    Add a workout
+                  </span>
                 </button>
               </Link>
             </div>
           ) : (
-            <div className="flex md:py-4 rounded-lg flex-col md:gap-4">
+            <div className="flex md:py-4 md:rounded-lg flex-col md:gap-4 md:from-transparent md:bg-transparent  bg-gradient-to-r from-secondary to-dark">
               <WorkoutCard />
               <WorkoutCard />
               <WorkoutCard />

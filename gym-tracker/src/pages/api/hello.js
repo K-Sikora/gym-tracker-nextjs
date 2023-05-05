@@ -1,8 +1,14 @@
-import dbPool from "../../connection.js";
+import prisma from "../../connection";
 
-export default function handler(req, res) {
-  dbPool.query("SELECT * FROM Workouts", (err, results) => {
-    if (err) throw err;
-    res.json(results);
-  });
+export default async function main() {
+  const users = await prisma.users.deleteMany();
+  console.log(users);
 }
+
+main()
+  .catch((e) => {
+    throw e;
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

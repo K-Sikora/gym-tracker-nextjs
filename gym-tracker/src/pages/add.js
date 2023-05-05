@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import Loader from "@/components/Loader";
 import Exercise from "@/components/add/Exercise";
 import { MdDownloadDone } from "react-icons/md";
+import axios from "axios";
 const add = (props) => {
   const { status, data } = useSession();
   const router = useRouter();
@@ -29,11 +30,23 @@ const add = (props) => {
     router.push("/");
   }
 
-  const [workoutTitle, setworkoutTitle] = useState("Workout #1");
+  const [workoutTitle, setworkoutTitle] = useState("Workout");
 
-  const handleSubmitWorkout = () => {
-    console.log(workoutTitle);
-    console.log(selectedExercise);
+  const handleSubmitWorkout = async () => {
+    // console.log(workoutTitle);
+    console.log(data);
+    const userId = data.user.name;
+    try {
+      console.log(selectedExercise);
+
+      await axios.post("/api/addworkout", {
+        workoutTitle,
+        userId,
+        selectedExercise,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className="md:pb-8 ">

@@ -40,7 +40,6 @@ const Exercise = (props) => {
         );
   const [currentSets, setcurrentSets] = useState(1);
   useEffect(() => {
-    console.log(reps);
     const id = props.exerciseNumber;
     props.setSelectedExercise((prevSelectedExercise) => {
       const exerciseIndex = prevSelectedExercise.findIndex(
@@ -87,7 +86,7 @@ const Exercise = (props) => {
   return (
     <div
       data-exercise-id={props.exerciseNumber}
-      className="flex flex-col rounded-md p-2 py-4 bg-secondary shadow-md shadow-dark/20  "
+      className="flex flex-col rounded-md p-2 py-4 bg-gradient-to-r from-[#0a356d]  to-dark shadow-md shadow-dark/20  "
     >
       <span className="text-base mb-4 font-medium  text-center">
         Exercise {props.exerciseNumber}

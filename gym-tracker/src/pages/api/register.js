@@ -1,39 +1,36 @@
-import dbPool from "../../connection.js";
-const bcrypt = require("bcrypt");
-export default function register(req, res) {
-  const saltRounds = 10;
+import bcrypt from "bcrypt";
+import prisma from "../../connection";
+
+export default async function register(req, res) {
   const { emailRegister, passwordRegister } = req.body; // Downloading data from request
 
-  // Hashing password
-  bcrypt.genSalt(saltRounds, function (err, salt) {
-    if (err) throw err;
-    bcrypt.hash(passwordRegister, salt, function (err, hash) {
-      if (err) throw err;
-      const values = [emailRegister, hash];
+  try {
+    // Hashing password
+    const hashedPassword = await bcrypt.hash(passwordRegister, 10);
 
-      // Check if user already exists
-      dbPool.query(
-        "SELECT * FROM users WHERE email = ?",
-        [emailRegister],
-        (err, results) => {
-          if (err) throw err;
-
-          if (results.length > 0) {
-            // User already exists
-            res.status(409).json({ message: "User already exists" });
-          } else {
-            // Adding new user to database
-            dbPool.query(
-              "INSERT INTO users (email, password) VALUES (?, ?)",
-              values,
-              (err, results) => {
-                if (err) throw err;
-                res.status(201).json({ message: "User created successfully" });
-              }
-            );
-          }
-        }
-      );
+    // Check if user already exists
+    const user = await prisma.user.findUnique({
+      where: {
+        email: emailRegister,
+      },
     });
-  });
+
+    if (user) {
+      // User already exists
+      res.status(409).json({ message: "User already exists" });
+    } else {
+      // Adding new user to database
+      await prisma.user.create({
+        data: {
+          email: emailRegister,
+          password: hashedPassword,
+        },
+      });
+
+      res.status(201).json({ message: "User created successfully" });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 }

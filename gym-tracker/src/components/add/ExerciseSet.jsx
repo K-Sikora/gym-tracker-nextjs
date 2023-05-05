@@ -39,7 +39,7 @@ const ExerciseSet = (props) => {
                 ...props.weight.slice(index + 1),
               ]);
             } else {
-              props.setWeight([...props.reps, { id: props.id, value }]);
+              props.setWeight([...props.weight, { id: props.id, value }]);
             }
           }}
           placeholder="KG"
