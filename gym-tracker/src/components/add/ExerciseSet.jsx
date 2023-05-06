@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 const ExerciseSet = (props) => {
   return (
-    <div className="grid gap-2 grid-cols-4 rounded-lg bg-primary px-3 py-2 items-center ">
+    <div className="grid gap-2 grid-cols-4 rounded-lg  shadow-md shadow-primary/20 from-[#052651] to-secondary bg-gradient-to-bl px-3 py-2 items-center ">
       <span className=" text-sm font-medium">SET {props.setId}</span>
       <div className=" place-self-center">
         <input
@@ -22,11 +22,11 @@ const ExerciseSet = (props) => {
             }
           }}
           placeholder="12"
-          className="w-12 text-center text-sm placeholder:text-gray-300 pb-1 outline-none bg-transparent border-accent duration-300  border-b-2"
+          className="w-12 text-center text-sm placeholder:text-gray-300 pb-1 outline-none bg-transparent border-primary duration-300  border-b-2"
         ></input>
       </div>
 
-      <div className=" place-self-center">
+      <div className=" place-self-center ">
         <input
           onChange={(e) => {
             const value = e.target.value;
@@ -43,7 +43,7 @@ const ExerciseSet = (props) => {
             }
           }}
           placeholder="KG"
-          className="w-12 text-center text-sm placeholder:text-gray-300 pb-1 outline-none bg-transparent border-accent duration-300  border-b-2"
+          className="w-12 text-center text-sm placeholder:text-gray-300 pb-1 outline-none bg-transparent border-primary duration-300  border-b-2"
         ></input>
       </div>
     </div>

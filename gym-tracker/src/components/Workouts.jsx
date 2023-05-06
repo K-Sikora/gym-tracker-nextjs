@@ -3,7 +3,25 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FaPlusCircle } from "react-icons/fa";
 import WorkoutCard from "./WorkoutCard";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useQuery } from "react-query";
+import axios from "axios";
 const Workouts = (props) => {
+  const { status, data } = useSession();
+
+  const getWorkouts = async () => {
+    const id = data.user.name;
+    const response = await axios.get(`/api/getworkouts/${id}`);
+    console.log(response.data);
+    return response.data;
+  };
+
+  const { data: workouts, isLoading } = useQuery({
+    queryKey: "workouts",
+    queryFn: getWorkouts,
+    refetchOnWindowFocus: false,
+  });
+
   const [noWorkouts, setnoWorkouts] = useState(false);
   return (
     <div className="md:pb-8 ">
@@ -31,9 +49,14 @@ const Workouts = (props) => {
             </div>
           ) : (
             <div className="flex md:py-4 md:rounded-lg flex-col md:gap-4 md:from-transparent md:bg-transparent  bg-gradient-to-r from-secondary to-dark">
-              <WorkoutCard />
-              <WorkoutCard />
-              <WorkoutCard />
+              {workouts &&
+                workouts.map((workout) => (
+                  <WorkoutCard
+                    id={workout.id}
+                    name={workout.name}
+                    date={workout.date}
+                  />
+                ))}
             </div>
           )}
         </motion.div>

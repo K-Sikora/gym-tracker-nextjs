@@ -30,37 +30,53 @@ export default function Example() {
           <div className="px-1 py-1 ">
             <a href="/profile">
               <Menu.Item>
-                <button className="group flex w-full items-center text-black rounded-md px-2 py-2 text-sm hover:bg-primary hover:text-white duration-150">
-                  <AiOutlineUser
-                    className="mr-2 h-5 w-5"
-                    aria-hidden="true"
-                  />
-                  {data && data.user.email}
-                </button>
+                {({ active }) => (
+                  <button
+                    className={`group flex ${
+                      active ? "bg-primary text-white" : ""
+                    } w-full items-center text-black rounded-md px-2 py-2 text-sm hover:bg-primary hover:text-white duration-150`}
+                  >
+                    <AiOutlineUser
+                      className="mr-2 h-5 w-5"
+                      aria-hidden="true"
+                    />
+                    {data && data.user.email}
+                  </button>
+                )}
               </Menu.Item>
             </a>
             <a href="/">
               <Menu.Item>
-                <button className="group flex w-full items-center text-black rounded-md px-2 py-2 text-sm hover:bg-primary hover:text-white duration-150">
-                  <RxDashboard
-                    className="mr-2 h-5 w-5"
-                    aria-hidden="true"
-                  />
-                  Dashboard
-                </button>
+                {({ active }) => (
+                  <button
+                    className={`group flex ${
+                      active ? "bg-primary text-white " : ""
+                    } w-full items-center text-black rounded-md px-2 py-2 text-sm hover:bg-primary hover:text-white duration-150`}
+                  >
+                    <RxDashboard
+                      className="mr-2 h-5 w-5"
+                      aria-hidden="true"
+                    />
+                    Dashboard
+                  </button>
+                )}
               </Menu.Item>
             </a>
             <Menu.Item>
-              <button
-                onClick={signOut}
-                className="group flex w-full items-center text-black rounded-md px-2 py-2 text-sm hover:bg-primary hover:text-white duration-150"
-              >
-                <HiOutlineLogout
-                  className="mr-2 h-5 w-5"
-                  aria-hidden="true"
-                />
-                Sign out
-              </button>
+              {({ active }) => (
+                <button
+                  onClick={signOut}
+                  className={`group ${
+                    active ? "bg-primary text-white" : ""
+                  } flex w-full items-center text-black rounded-md px-2 py-2 text-sm hover:bg-primary hover:text-white duration-150`}
+                >
+                  <HiOutlineLogout
+                    className="mr-2 h-5 w-5"
+                    aria-hidden="true"
+                  />
+                  Sign out
+                </button>
+              )}
             </Menu.Item>
           </div>
         </Menu.Items>

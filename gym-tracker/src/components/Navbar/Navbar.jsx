@@ -24,9 +24,9 @@ const Navbar = () => {
           <ul className="flex gap-7 text-base font-medium">
             <Link href="/">
               <li
-                className={`flex cursor-pointer justify-center items-center gap-2 hover:border-accent ${
+                className={`flex cursor-pointer justify-center items-center gap-2 hover:border-primary ${
                   router.pathname === "/"
-                    ? "border-accent "
+                    ? "border-primary "
                     : "border-transparent"
                 } duration-300 text-base border-b-[3px] px-2 py-2`}
               >
@@ -38,9 +38,9 @@ const Navbar = () => {
               <li
                 className={`flex cursor-pointer ${
                   router.pathname === "/exercises"
-                    ? "border-accent "
+                    ? "border-primary "
                     : "border-transparent"
-                } hover:border-accent  duration-300 justify-center items-center gap-2 text-base border-b-[3px]  px-2 py-2`}
+                } hover:border-primary  duration-300 justify-center items-center gap-2 text-base border-b-[3px]  px-2 py-2`}
               >
                 <MdSportsGymnastics className="text-lg" />
                 Exercises
@@ -48,9 +48,9 @@ const Navbar = () => {
             </Link>
             <Link href="/schemas">
               <li
-                className={`flex cursor-pointer hover:border-accent duration-300 justify-center items-center gap-2 text-base border-b-[3px] ${
+                className={`flex cursor-pointer hover:border-primary duration-300 justify-center items-center gap-2 text-base border-b-[3px] ${
                   router.pathname === "/schemas"
-                    ? "border-accent "
+                    ? "border-primary "
                     : "border-transparent"
                 } px-2 py-2`}
               >
@@ -60,9 +60,9 @@ const Navbar = () => {
             </Link>
             <Link href="/add">
               <li
-                className={`flex cursor-pointer hover:border-accent duration-300 justify-center items-center gap-2 text-base border-b-[3px] ${
+                className={`flex cursor-pointer hover:border-primary duration-300 justify-center items-center gap-2 text-base border-b-[3px] ${
                   router.pathname === "/add"
-                    ? "border-accent "
+                    ? "border-primary "
                     : "border-transparent"
                 } px-2 py-2`}
               >
@@ -76,7 +76,7 @@ const Navbar = () => {
         <nav className="flex items-center  md:hidden">
           <ul className="flex items-center gap-5 text-base font-medium">
             <Link
-              className="hover:text-accent duration-300"
+              className="hover:text-primary duration-300"
               href="/"
             >
               <li
@@ -85,14 +85,14 @@ const Navbar = () => {
                 <FaCalendarCheck
                   className={`
                 duration-300
-              ${router.pathname === "/" ? "text-accent " : ""}
+              ${router.pathname === "/" ? "text-primary " : ""}
               
               `}
                 />
               </li>
             </Link>
             <Link
-              className="hover:text-accent duration-300"
+              className="hover:text-primary duration-300"
               href="/exercises"
             >
               <li
@@ -102,14 +102,14 @@ const Navbar = () => {
                 <MdSportsGymnastics
                   className={`
                 duration-300
-              ${router.pathname === "/exercises" ? "text-accent " : ""}
+              ${router.pathname === "/exercises" ? "text-primary " : ""}
               
               `}
                 />
               </li>
             </Link>
             <Link
-              className="hover:text-accent duration-300"
+              className="hover:text-primary duration-300"
               href="/schemas"
             >
               <li
@@ -118,21 +118,21 @@ const Navbar = () => {
                 <CgGym
                   className={`
                 duration-300
-              ${router.pathname === "/schemas" ? "text-accent " : ""}
+              ${router.pathname === "/schemas" ? "text-primary " : ""}
               
               `}
                 />
               </li>
             </Link>
             <Link
-              className="hover:text-accent duration-300"
+              className="hover:text-primary duration-300"
               href="/add"
             >
               <li className="flex cursor-pointer  duration-300 justify-center items-center gap-2 text-base   px-2 py-2">
                 <FaCalendarPlus
                   className={`
                   duration-300
-                ${router.pathname === "/add" ? "text-accent " : ""}
+                ${router.pathname === "/add" ? "text-primary " : ""}
                 
                 `}
                 />

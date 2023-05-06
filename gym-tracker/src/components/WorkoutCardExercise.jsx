@@ -1,7 +1,7 @@
 import React from "react";
 const WorkoutCardExercise = () => {
   return (
-    <div className="flex flex-grow bg-gradient-to-r from-primary/30 to-secondary md:bg-gradient-to-tl px-4 py-3 rounded-lg gap-4">
+    <div className="flex flex-grow bg-gradient-to-r shadow-sm shadow-primary/60 from-secondary to-dark md:bg-gradient-to-br px-4 py-3 rounded-lg gap-4">
       <img
         src="./exercises/barbell-bench-press.jpg"
         className="rounded-full w-14 h-14"

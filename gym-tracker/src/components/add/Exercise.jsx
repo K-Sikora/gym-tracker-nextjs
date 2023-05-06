@@ -86,7 +86,7 @@ const Exercise = (props) => {
   return (
     <div
       data-exercise-id={props.exerciseNumber}
-      className="flex flex-col rounded-md p-2 py-4 bg-gradient-to-r from-[#0a356d]  to-dark shadow-md shadow-dark/20  "
+      className="flex flex-col rounded-md p-2 py-4 bg-gradient-to-tr from-dark to-secondary shadow-md shadow-dark/20  "
     >
       <span className="text-base mb-4 font-medium  text-center">
         Exercise {props.exerciseNumber}
@@ -98,7 +98,7 @@ const Exercise = (props) => {
           onChange={setSelected}
         >
           <div className="relative mb-4">
-            <div className="relative w-full rounded-lg bg-primary cursor-default overflow-hidden  text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+            <div className="relative w-full rounded-lg from-[#052651] to-secondary bg-gradient-to-bl shadow-md shadow-primary/20  md:bg-gradient-to-br cursor-default overflow-hidden  text-left  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
               <Combobox.Input
                 className="w-full border-none py-2  pl-3 pr-10 text-sm leading-5 bg-transparent  text-white font-medium focus:ring-0"
                 displayValue={(exercise) => exercise.name}
@@ -164,7 +164,7 @@ const Exercise = (props) => {
             </Transition>
           </div>
         </Combobox>
-        <div className="flex gap-1 mb-2 justify-center items-center">
+        <div className="flex gap-1 mb-2 justify-center  items-center">
           <input
             onChange={(e) => {
               setcurrentSetsValue(e.target.value);
