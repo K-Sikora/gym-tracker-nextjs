@@ -32,31 +32,26 @@ const add = (props) => {
   }
 
   const [workoutTitle, setworkoutTitle] = useState("My workout");
-
   const handleSubmitWorkout = async () => {
     if (workoutTitle.length > 0) {
       const userId = data.user.name;
+      const postData = {
+        workoutTitle,
+        userId,
+        selectedExercise,
+      };
+      let hasInvalidValue = false;
 
-      selectedExercise.map((exercise, exerciseIndex) => {
-        exercise.sets.map((set, index) => {
+      selectedExercise.forEach((exercise, exerciseIndex) => {
+        exercise.sets.forEach((set, index) => {
           if (
             set.reps &&
             set.reps.value > 0 &&
             set.weight &&
             set.weight.value > 0
           ) {
-            (async function sendData() {
-              try {
-                await axios.post("/api/addworkout", {
-                  workoutTitle,
-                  userId,
-                  selectedExercise,
-                });
-              } catch (error) {
-                console.error(error);
-              }
-            })();
           } else {
+            hasInvalidValue = true;
             toast.error(
               `Invalid value in set ${index + 1}, exercise ${
                 exerciseIndex + 1
@@ -75,6 +70,14 @@ const add = (props) => {
           }
         });
       });
+
+      if (!hasInvalidValue) {
+        try {
+          await axios.post("/api/addworkout", postData);
+        } catch (error) {
+          console.error(error);
+        }
+      }
     } else {
       toast.error(`Invalid value for workout title`, {
         position: "bottom-left",
@@ -88,6 +91,7 @@ const add = (props) => {
       });
     }
   };
+
   return (
     <div className="md:pb-8 ">
       {status === "authenticated" && (

@@ -2,19 +2,17 @@ import prisma from "../../../connection";
 
 export default async function getWorkouts(req, res) {
   const { id } = req.query;
-  const userWorkouts = await prisma.user.findUnique({
-    where: { id: parseInt(id) },
+  const userWorkouts = await prisma.workout.findMany({
+    where: {
+      userId: parseInt(id),
+    },
     include: {
-      workouts: {
+      exercises: {
         include: {
-          exercises: {
-            include: {
-              sets: true,
-            },
-          },
+          sets: true,
         },
       },
     },
   });
-  res.json(userWorkouts);
+  res.json(userWorkouts.reverse());
 }

@@ -1,9 +1,9 @@
 import React from "react";
-import { MoonLoader } from "react-spinners";
+import { PuffLoader } from "react-spinners";
 const Loader = () => {
   return (
     <div className="w-full h-screen flex items-center justify-center">
-      <MoonLoader color="#005fa7" />
+      <PuffLoader color="#005fa7" />
     </div>
   );
 };

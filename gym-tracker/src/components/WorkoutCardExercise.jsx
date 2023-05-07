@@ -1,15 +1,46 @@
 import React from "react";
-const WorkoutCardExercise = () => {
+import { motion } from "framer-motion";
+const WorkoutCardExercise = (props) => {
   return (
     <div className="flex flex-grow bg-gradient-to-r shadow-sm shadow-primary/60 from-secondary to-dark md:bg-gradient-to-br px-4 py-3 rounded-lg gap-4">
-      <img
+      <motion.img
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.1 }}
         src="./exercises/barbell-bench-press.jpg"
         className="rounded-full w-14 h-14"
-      ></img>
-      <div className="flex flex-col text-xs font-medium justify-center  ">
-        <span className="text-sm">Barbell bench press</span>
-        <span>5 Sets</span>
-        <span>Reps: 12, 12, 12, 12, 12</span>
+      ></motion.img>
+
+      <div className="flex  flex-col text-xs font-medium justify-center  ">
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.1 }}
+          className="text-sm "
+        >
+          {props.exercise.name}
+        </motion.span>
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
+        >
+          {props.exercise.sets.length} sets
+        </motion.span>
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+        >
+          Reps: {props.exercise.sets.map((set) => set.repetitions).join(", ")}
+        </motion.span>
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.4 }}
+        >
+          Weight: {props.exercise.sets.map((set) => set.weight).join(", ")}
+        </motion.span>
       </div>
     </div>
   );

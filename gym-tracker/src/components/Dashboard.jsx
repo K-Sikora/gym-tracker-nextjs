@@ -8,7 +8,6 @@ const Dashboard = () => {
     required: true,
   });
 
-  console.log(session);
   return (
     <div className="w-full">
       <Navbar />

@@ -6,6 +6,9 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useQuery } from "react-query";
 import axios from "axios";
+
+import Loader from "./Loader";
+import WorkoutLoader from "./WorkoutLoader";
 const Workouts = (props) => {
   const { status, data } = useSession();
 
@@ -49,14 +52,18 @@ const Workouts = (props) => {
             </div>
           ) : (
             <div className="flex md:py-4 md:rounded-lg flex-col md:gap-4 md:from-transparent md:bg-transparent  bg-gradient-to-r from-secondary to-dark">
-              {workouts &&
-                workouts.map((workout) => (
+              {workouts ? (
+                workouts.map((workout, index) => (
                   <WorkoutCard
-                    id={workout.id}
-                    name={workout.name}
-                    date={workout.date}
+                    key={index}
+                    workout={workout}
                   />
-                ))}
+                ))
+              ) : (
+                <>
+                  <WorkoutLoader />
+                </>
+              )}
             </div>
           )}
         </motion.div>
