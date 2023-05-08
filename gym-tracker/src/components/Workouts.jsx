@@ -25,7 +25,6 @@ const Workouts = (props) => {
     refetchOnWindowFocus: false,
   });
 
-  const [noWorkouts, setnoWorkouts] = useState(false);
   return (
     <div className="md:pb-8 ">
       <AnimatePresence>
@@ -34,9 +33,9 @@ const Workouts = (props) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
-          className="min-h-screen md:border-2 rounded-sm  md:mt-10 border-dark/10"
+          className="min-h-screen md:border-2   rounded-sm  md:mt-10 border-primary/5"
         >
-          {noWorkouts ? (
+          {workouts && workouts.length === 0 ? (
             <div className="flex items-center justify-center flex-col gap-4">
               <h2 className=" text-2xl pt-10 font-semibold">
                 You don't have any workouts
@@ -51,7 +50,7 @@ const Workouts = (props) => {
               </Link>
             </div>
           ) : (
-            <div className="flex md:py-4 md:rounded-lg flex-col md:gap-4 md:from-transparent md:bg-transparent  bg-gradient-to-r from-secondary to-dark">
+            <div className="flex md:py-4 md:rounded-lg flex-col md:gap-4 md:from-transparent md:bg-transparent min-h-screen bg-gradient-to-r from-secondary to-dark">
               {workouts ? (
                 workouts.map((workout, index) => (
                   <WorkoutCard

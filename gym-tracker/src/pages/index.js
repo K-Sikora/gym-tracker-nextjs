@@ -72,7 +72,7 @@ const index = () => {
   let numbers = /[0-9]/g;
 
   return (
-    <section className="flex h-screen w-full  ">
+    <section className="flex h-screen w-full   ">
       {status === "unauthenticated" && (
         <div className="lg:w-1/2  text-white relative hidden lg:block  cover h-full flex-grow">
           <div className="absolute top-0 left-0 w-full h-full bg-black/70"></div>

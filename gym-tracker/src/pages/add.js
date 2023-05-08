@@ -13,6 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const add = (props) => {
   const { status, data } = useSession();
+  const [loadingSubmit, setloadingSubmit] = useState(false);
   const router = useRouter();
   let exercises = [];
   const [selectedExercise, setSelectedExercise] = useState([]);
@@ -70,12 +71,15 @@ const add = (props) => {
           }
         });
       });
-
       if (!hasInvalidValue) {
         try {
-          await axios.post("/api/addworkout", postData);
+          setloadingSubmit(true);
+          await axios.post("/api/addworkout", postData, { timeout: 3000 });
+          window.location.reload();
         } catch (error) {
           console.error(error);
+        } finally {
+          router.push("/");
         }
       }
     } else {
@@ -93,64 +97,70 @@ const add = (props) => {
   };
 
   return (
-    <div className="md:pb-8 ">
+    <div className="md:pb-8 bg-gradient-to-r from-secondary to-dark">
       {status === "authenticated" && (
         <>
-          <Navbar />
-          <Layout>
-            {props.isLoading ? (
-              <Loader />
-            ) : (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-                className="min-h-screen md:border-2 md:py-4 md:mt-10 rounded-sm border-dark/10"
-              >
-                <div className="w-full md:px-4  text-white">
-                  <div className="md:rounded-lg border-b-2 min-h-screen md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
-                    <div className="mt-2 pt-2  gap-7 flex flex-col ">
-                      <input
-                        value={workoutTitle}
-                        onChange={(e) => {
-                          const newValue = e.target.value;
-                          const regex = /^[a-zA-Z0-9\s]*$/;
-                          if (regex.test(newValue)) {
-                            setworkoutTitle(newValue);
-                          }
-                        }}
-                        className="bg-transparent caret-black text-black placeholder:text-gray-500 text-lg border-b-2 duration-300 outline-none font-semibold border-gray-400 focus:outline-none focus:border-primary py-1"
-                      ></input>
-                      {exercises}
-                      <button
-                        onClick={() => {
-                          setcurrentExercises(currentExercises + 1);
-                        }}
-                        className="text-base font-medium gap-2 text-black self-center flex justify-center items-center"
-                      >
-                        Add next exercise
-                        <BiPlus className="text-lg" />
-                      </button>
-                      <button
-                        onClick={handleSubmitWorkout}
-                        className="bg-primary hidden md:flex gap-2 self-center  items-center justify-center text-white py-2 px-4 rounded-lg"
-                      >
-                        Submit workout
-                        <MdDownloadDone className="text-xl" />
-                      </button>
-                      <button
-                        onClick={handleSubmitWorkout}
-                        className="bg-primary shadow-lg shadow-primary/20 flex items-center justify-center fixed md:hidden right-3 bottom-3 gap-2 self-center text-white h-12 w-12 rounded-full"
-                      >
-                        <MdDownloadDone className="text-2xl" />
-                      </button>
+          {!loadingSubmit ? (
+            <>
+              <Navbar />
+              <Layout>
+                {props.isLoading ? (
+                  <Loader />
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    className="min-h-screen md:border-2 md:py-4 md:mt-10 rounded-sm border-primary/5"
+                  >
+                    <div className="w-full md:px-4  text-white">
+                      <div className="md:rounded-lg border-b-2 min-h-screen md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
+                        <div className="mt-2 pt-2  gap-7 flex flex-col ">
+                          <input
+                            value={workoutTitle}
+                            onChange={(e) => {
+                              const newValue = e.target.value;
+                              const regex = /^[a-zA-Z0-9\s]*$/;
+                              if (regex.test(newValue)) {
+                                setworkoutTitle(newValue);
+                              }
+                            }}
+                            className="bg-transparent caret-white text-white placeholder:text-gray-500 text-lg border-b-2 duration-300 outline-none font-semibold border-gray-400 focus:outline-none focus:border-primary py-1"
+                          ></input>
+                          {exercises}
+                          <button
+                            onClick={() => {
+                              setcurrentExercises(currentExercises + 1);
+                            }}
+                            className="text-base font-medium gap-2 text-white self-center flex justify-center items-center"
+                          >
+                            Add next exercise
+                            <BiPlus className="text-lg" />
+                          </button>
+                          <button
+                            onClick={handleSubmitWorkout}
+                            className="bg-primary hidden md:flex gap-2 self-center  items-center justify-center text-white py-2 px-4 rounded-lg"
+                          >
+                            Submit workout
+                            <MdDownloadDone className="text-xl" />
+                          </button>
+                          <button
+                            onClick={handleSubmitWorkout}
+                            className="bg-primary shadow-lg shadow-primary/20 flex items-center justify-center fixed md:hidden right-3 bottom-3 gap-2 self-center text-white h-12 w-12 rounded-full"
+                          >
+                            <MdDownloadDone className="text-2xl" />
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </Layout>
+                  </motion.div>
+                )}
+              </Layout>
+            </>
+          ) : (
+            <Loader />
+          )}
         </>
       )}
       {status === "unauthenticated" && <Loader />}

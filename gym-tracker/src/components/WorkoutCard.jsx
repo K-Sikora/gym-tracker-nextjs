@@ -62,7 +62,6 @@ const WorkoutCard = (props) => {
 
           <div className="flex  flex-col gap-1 text-sm font-medium items-end ">
             <span>Total volume: {calculateTotalVolume(props.workout)} kg</span>
-            <span className="text-xs font-medium">Duration: 1h 24m</span>
           </div>
         </motion.div>
         <div className="mt-2 pt-2 md:border-t-2 gap-4 flex flex-col md:border-gray-300/10">

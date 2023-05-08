@@ -86,7 +86,7 @@ const Exercise = (props) => {
   return (
     <div
       data-exercise-id={props.exerciseNumber}
-      className="flex flex-col rounded-md p-2 py-4 bg-gradient-to-tr from-dark to-secondary shadow-md shadow-dark/20  "
+      className="flex flex-col rounded-md p-2 py-4 bg-secondary shadow-md shadow-primary/5  "
     >
       <span className="text-base mb-4 font-medium  text-center">
         Exercise {props.exerciseNumber}

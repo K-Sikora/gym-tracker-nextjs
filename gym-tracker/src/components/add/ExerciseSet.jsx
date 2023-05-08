@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 const ExerciseSet = (props) => {
   return (
-    <div className="grid gap-2 grid-cols-4 rounded-lg  shadow-md shadow-primary/20 from-[#052651] to-secondary bg-gradient-to-bl px-3 py-2 items-center ">
+    <div className="grid gap-2 grid-cols-4 rounded-lg  shadow-sm shadow-primary/20 from-[#052651] to-secondary bg-gradient-to-bl px-3 py-2 items-center ">
       <span className=" text-sm font-medium">SET {props.setId}</span>
       <div className=" place-self-center">
         <input
