@@ -173,7 +173,8 @@ const Exercise = (props) => {
             className="outline-none text-center focus:border-primary duration-300 w-12 rounded-md text-sm placeholder:text-gray-300 p-1 border-primary/90 border-2 bg-transparent"
           ></input>
           <button
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               if (currentSetsValue > 0 && currentSetsValue < 20) {
                 setcurrentSets(currentSetsValue);
               }

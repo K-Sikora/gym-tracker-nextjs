@@ -128,6 +128,7 @@ const index = () => {
                 <h2 className="mb-6 text-center font-medium text-3xl">Login</h2>
                 <form
                   action="#"
+                  method="POST"
                   onSubmit={(e) => {
                     e.preventDefault();
                     handleLogin();
@@ -208,6 +209,7 @@ const index = () => {
                   Register
                 </h2>
                 <form
+                  method="POST"
                   action="#"
                   onSubmit={(e) => {
                     e.preventDefault();

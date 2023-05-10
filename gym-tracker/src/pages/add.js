@@ -11,6 +11,7 @@ import { MdDownloadDone } from "react-icons/md";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddedSuccesfully from "@/components/AddedSuccesfully";
 const add = (props) => {
   const { status, data } = useSession();
   const [loadingSubmit, setloadingSubmit] = useState(false);
@@ -33,7 +34,8 @@ const add = (props) => {
   }
 
   const [workoutTitle, setworkoutTitle] = useState("My workout");
-  const handleSubmitWorkout = async () => {
+  const handleSubmitWorkout = async (e) => {
+    e.preventDefault();
     if (workoutTitle.length > 0) {
       const userId = data.user.name;
       const postData = {
@@ -74,12 +76,10 @@ const add = (props) => {
       if (!hasInvalidValue) {
         try {
           setloadingSubmit(true);
-          await axios.post("/api/addworkout", postData, { timeout: 3000 });
-          window.location.reload();
+          await axios.post("/api/addworkout", postData);
+          router.push("/");
         } catch (error) {
           console.error(error);
-        } finally {
-          router.push("/");
         }
       }
     } else {
@@ -116,7 +116,11 @@ const add = (props) => {
                   >
                     <div className="w-full md:px-4  text-white">
                       <div className="md:rounded-lg border-b-2 min-h-screen md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
-                        <div className="mt-2 pt-2  gap-7 flex flex-col ">
+                        <form
+                          action="#"
+                          method="POST"
+                          className="mt-2 pt-2  gap-7 flex flex-col "
+                        >
                           <input
                             value={workoutTitle}
                             onChange={(e) => {
@@ -130,7 +134,8 @@ const add = (props) => {
                           ></input>
                           {exercises}
                           <button
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.preventDefault();
                               setcurrentExercises(currentExercises + 1);
                             }}
                             className="text-base font-medium gap-2 text-white self-center flex justify-center items-center"
@@ -151,7 +156,7 @@ const add = (props) => {
                           >
                             <MdDownloadDone className="text-2xl" />
                           </button>
-                        </div>
+                        </form>
                       </div>
                     </div>
                   </motion.div>
@@ -159,7 +164,7 @@ const add = (props) => {
               </Layout>
             </>
           ) : (
-            <Loader />
+            <AddedSuccesfully workoutTitle={workoutTitle} />
           )}
         </>
       )}
