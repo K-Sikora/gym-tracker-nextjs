@@ -1,7 +1,7 @@
 import React from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Navbar from "@/components/Navbar/Navbar";
-import Layout from "@/components/Layout";
+import GradientLayout from "@/components/GradientLayout";
 import Workouts from "./Workouts";
 const Dashboard = () => {
   const { data: session } = useSession({
@@ -11,11 +11,9 @@ const Dashboard = () => {
   return (
     <div className="w-full">
       <Navbar />
-      <Layout>
-        <div>
-          <Workouts />
-        </div>
-      </Layout>
+      <GradientLayout>
+        <Workouts />
+      </GradientLayout>
     </div>
   );
 };

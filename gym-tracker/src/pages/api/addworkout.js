@@ -13,7 +13,7 @@ export default async function (req, res) {
 
         exercises: {
           create: selectedExercise.map((exercise) => ({
-            name: exercise.selected.name,
+            name: exercise.selected.exercise_name,
             sets: {
               create: exercise.sets.map((set) => ({
                 repetitions: parseInt(set.reps.value),

@@ -38,3 +38,9 @@ model Set {
   exercise    Exercise  @relation(fields: [exerciseId], references: [id])
   exerciseId  Int
 }
+
+model ExerciseList {
+  workout_id    Int       @id @default(autoincrement())
+  exercise_name String    @db.VarChar(255) @unique
+  muscle_group  String    @db.VarChar(255)
+}

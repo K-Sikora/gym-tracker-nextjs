@@ -10,14 +10,12 @@ const ExerciseSet = (props) => {
             const index = props.setId - 1;
 
             if (index !== -1) {
-              // Aktualizuj wartość istniejącego elementu
               props.setReps([
                 ...props.reps.slice(0, index),
                 { id: props.id, value },
                 ...props.reps.slice(index + 1),
               ]);
             } else {
-              // Dodaj nowy element
               props.setReps([...props.reps, { id: props.id, value }]);
             }
           }}

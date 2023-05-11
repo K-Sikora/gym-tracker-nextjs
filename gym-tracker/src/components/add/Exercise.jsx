@@ -3,28 +3,23 @@ import ExerciseSet from "./ExerciseSet";
 import { Combobox, Transition } from "@headlessui/react";
 
 import { BiCheck, BiChevronUp } from "react-icons/bi";
-const exercises = [
-  { name: "Bench Press" },
-  { name: `Squat` },
-  { name: "Deadlift" },
-  { name: "Overhead Press" },
-  { name: "Barbell Row" },
-  { name: "Bent Over Row" },
-  { name: "Lateral Raises" },
-  { name: "Pull Ups" },
-  { name: "Push Ups" },
-  { name: "Dips" },
-  { name: "Tricep Dips" },
-  { name: "Lunges" },
-  { name: "Calf Raises" },
-  { name: "Leg Press" },
-  { name: "Leg Extension" },
-  { name: "Leg Curls" },
-  { name: "Hamstring Curls" },
-  { name: "Sit Ups" },
-];
+import { useQuery } from "react-query";
+import axios from "axios";
+
 const Exercise = (props) => {
-  const [selected, setSelected] = useState(exercises[0]);
+  const getExercises = async () => {
+    const results = await axios.get("/api/getexercises");
+    console.log(results.data);
+    return results.data;
+  };
+  const { data: exercises } = useQuery({
+    queryKey: "exercises",
+    queryFn: getExercises,
+    refetchOnWindowFocus: false,
+  });
+
+  const [selected, setSelected] = useState({});
+
   const sets = [];
   const [reps, setReps] = useState([]);
   const [weight, setWeight] = useState([]);
@@ -33,7 +28,7 @@ const Exercise = (props) => {
     query === ""
       ? exercises
       : exercises.filter((exercise) =>
-          exercise.name
+          exercise.exercise_name
             .toLowerCase()
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, ""))
@@ -82,6 +77,12 @@ const Exercise = (props) => {
       />
     );
   }
+  useEffect(() => {
+    if (exercises && exercises.length > 0) {
+      setSelected(exercises[0]);
+    }
+  }, [exercises]);
+
   const [currentSetsValue, setcurrentSetsValue] = useState();
   return (
     <div
@@ -101,9 +102,10 @@ const Exercise = (props) => {
             <div className="relative w-full rounded-lg from-[#052651] to-secondary bg-gradient-to-bl shadow-md shadow-primary/20  md:bg-gradient-to-br cursor-default overflow-hidden  text-left  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
               <Combobox.Input
                 className="w-full border-none py-2  pl-3 pr-10 text-sm leading-5 bg-transparent  text-white font-medium focus:ring-0"
-                displayValue={(exercise) => exercise.name}
+                displayValue={(exercise) => exercise.exercise_name}
                 onChange={(event) => setQuery(event.target.value)}
               />
+
               <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
                 <BiChevronUp
                   className="h-5 w-5 text-gray-400"
@@ -119,11 +121,14 @@ const Exercise = (props) => {
               afterLeave={() => setQuery("")}
             >
               <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {filteredExercises.length === 0 && query !== "" ? (
+                {filteredExercises &&
+                filteredExercises.length === 0 &&
+                query !== "" ? (
                   <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                     Nothing found.
                   </div>
                 ) : (
+                  filteredExercises &&
                   filteredExercises.map((exercise) => (
                     <Combobox.Option
                       key={exercise.id}
@@ -141,7 +146,7 @@ const Exercise = (props) => {
                               selected ? "font-medium" : "font-normal"
                             }`}
                           >
-                            {exercise.name}
+                            {exercise.exercise_name}
                           </span>
                           {selected ? (
                             <span

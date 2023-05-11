@@ -76,6 +76,8 @@ const add = (props) => {
       if (!hasInvalidValue) {
         try {
           setloadingSubmit(true);
+          console.log(postData);
+
           await axios.post("/api/addworkout", postData);
           router.push("/");
         } catch (error) {
