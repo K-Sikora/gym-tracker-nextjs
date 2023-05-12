@@ -14,6 +14,7 @@ const Workouts = (props) => {
 
   const getWorkouts = async () => {
     const id = data.user.name;
+    console.log(id);
     const response = await axios.get(`/api/getworkouts/${id}`);
     console.log(response.data);
     return response.data;
