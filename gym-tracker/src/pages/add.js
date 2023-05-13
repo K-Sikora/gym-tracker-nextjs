@@ -113,7 +113,7 @@ const add = (props) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 1 }}
+                    transition={{ duration: 0.5 }}
                     className="min-h-screen md:border-2 md:py-4 md:mt-10 rounded-sm border-primary/5"
                   >
                     <div className="w-full md:px-4  text-white">

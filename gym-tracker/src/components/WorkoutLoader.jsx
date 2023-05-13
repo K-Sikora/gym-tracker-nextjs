@@ -3,10 +3,6 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { FiChevronDown } from "react-icons/fi";
 const WorkoutLoader = () => {
-  const workout = {
-    name: "Workout name",
-    date: "2023-05-05T19:32:14.981Z",
-  };
   return (
     <div className="w-full md:px-4  text-white">
       <div className=" md:bg-gradient-to-tr h-screen md:h-auto from-dark to-secondary md:rounded-lg border-b-2  border-primary/20  md:border-none shadow-md shadow-black/10 p-4 py-7 md:p-5">

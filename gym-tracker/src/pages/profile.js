@@ -9,6 +9,8 @@ import { useRouter } from "next/router";
 import GradientLayout from "@/components/GradientLayout";
 import axios from "axios";
 import { useQuery } from "react-query";
+import ProfileLoader from "@/components/ProfileLoader";
+import { MdQueryStats } from "react-icons/md";
 
 const profile = (props) => {
   const { status, data } = useSession();
@@ -80,35 +82,98 @@ const profile = (props) => {
       allExercises &&
       allExercises.length > 0
     ) {
-      const result = [];
+      let result = [];
+      const workoutExercises = [];
+      const everyExercise = [];
+      workouts.forEach((workout) => {
+        workout.exercises.forEach((exercise) => {
+          workoutExercises.push(exercise.name);
+        });
+      });
+
+      allExercises.forEach((exercise) => {
+        everyExercise.push(exercise.exercise_name);
+      });
+
+      workoutExercises.forEach((exercise) => {
+        if (everyExercise.includes(exercise)) {
+          const existingExercise = result.find(
+            (item) => item.name === exercise
+          );
+          if (existingExercise) {
+            existingExercise.count++;
+          } else {
+            result.push({ name: exercise, count: 1 });
+          }
+        }
+      });
+      console.log(result, "result");
+      const array = [];
+      const count = [];
+      result.forEach((item) => {
+        array.push(item.name);
+        count.push(item.count);
+      });
+
+      return [array, count];
     }
   };
-  passToGraph(workoutsInfo, allExercises);
-  ChartJS.register(ArcElement, Tooltip, Legend);
 
+  const resultLabel = passToGraph(workoutsInfo, allExercises);
+
+  ChartJS.register(ArcElement, Tooltip, Legend);
   const graphData = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: resultLabel && resultLabel.length > 0 ? resultLabel[0] : [],
     datasets: [
       {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
+        label: "Occurrences",
+        data: resultLabel && resultLabel.length > 0 ? resultLabel[1] : [],
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
+          "rgba(83, 74, 168, 0.6)",
+          "rgba(96, 22, 220, 0.6)",
+          "rgba(177, 70, 56, 0.6)",
+          "rgba(123, 182, 168, 0.6)",
+          "rgba(244, 232, 44, 0.6)",
+          "rgba(244, 29, 142, 0.6)",
+          "rgba(97, 252, 91, 0.6)",
+
+          "rgba(34, 167, 1, 0.6)",
+          "rgba(243, 45, 113, 0.6)",
+          "rgba(213, 87, 197, 0.6)",
+          "rgba(22, 244, 130, 0.6)",
+          "rgba(10, 7, 86, 0.6)",
+          "rgba(188, 7, 200, 0.6)",
+          "rgba(204, 204, 105, 0.6)",
+          "rgba(192, 154, 246, 0.6)",
+          "rgba(52, 9, 88, 0.6)",
+          "rgba(211, 85, 71, 0.6)",
+          "rgba(28, 96, 215, 0.6)",
+          "rgba(57, 205, 103, 0.6)",
+          "rgba(138, 130, 180, 0.6)",
         ],
         borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
+          "rgba(83, 74, 168, 0.7)",
+          "rgba(96, 22, 220, 0.7)",
+          "rgba(177, 70, 56, 0.7)",
+          "rgba(123, 182, 168, 0.7)",
+          "rgba(244, 232, 44, 0.7)",
+          "rgba(244, 29, 142, 0.7)",
+          "rgba(97, 252, 91, 0.7)",
+          "rgba(34, 167, 1, 0.7)",
+          "rgba(243, 45, 113, 0.7)",
+          "rgba(213, 87, 197, 0.7)",
+          "rgba(22, 244, 130, 0.7)",
+          "rgba(10, 7, 86, 0.7)",
+          "rgba(188, 7, 200, 0.7)",
+          "rgba(204, 204, 105, 0.7)",
+          "rgba(192, 154, 246, 0.7)",
+          "rgba(52, 9, 88, 0.7)",
+          "rgba(211, 85, 71, 0.7)",
+          "rgba(28, 96, 215, 0.7)",
+          "rgba(57, 205, 103, 0.7)",
+          "rgba(138, 130, 180, 0.7)",
         ],
-        borderWidth: 1,
+        borderWidth: 3,
       },
     ],
   };
@@ -127,44 +192,57 @@ const profile = (props) => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
               >
-                <div className="  md:px-8">
-                  <div className="max-w-5xl mx-auto flex flex-col gap-4">
-                    <div className=" md:border-2 md:py-4 md:mt-10 rounded-sm border-primary/5">
-                      <div className="w-full md:px-4 grid grid-cols-1 md:gap-2 md:grid-cols-2 text-white md:rounded-lg border-b-2  md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
-                        <div className="flex items-center gap-4 border-2  border-primary/10 rounded-lg p-3 justify-start">
-                          <span className="h-14 w-14 relative shadow-lg shadow-primary/10  flex items-center justify-center  rounded-full bg-primary pointer-events-none text-xl">
-                            {data && data.user.email.slice(0, 1).toUpperCase()}
-                          </span>
-                          <div className="flex flex-col  md:text-base font-medium">
-                            <p>{data && data.user.email}</p>
-                            {userInfo && (
-                              <p>
-                                Joined: {userInfo[0].date.slice(8, 10)}.
-                                {userInfo[0].date.slice(5, 7)}.
-                                {userInfo[0].date.slice(0, 4)}{" "}
-                                {userInfo[0].date.slice(11, 16)}
-                              </p>
-                            )}
+                {userInfo && workoutsInfo && allExercises ? (
+                  <div className="md:px-8">
+                    <div className="max-w-5xl mx-auto flex flex-col gap-4">
+                      <div className=" md:border-2 md:py-4 md:mt-10 rounded-sm border-primary/5">
+                        <div className="w-full md:px-4 md:grid  md:gap-2 md:grid-cols-2 text-white md:rounded-lg md:border-b-2  md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
+                          <div className="flex items-center gap-4 border-2  border-primary/10 rounded-lg p-3 justify-start">
+                            <span className="h-14 w-14 relative shadow-lg shadow-primary/10  flex items-center justify-center  rounded-full bg-primary pointer-events-none text-xl">
+                              {data &&
+                                data.user.email.slice(0, 1).toUpperCase()}
+                            </span>
+                            <div className="flex flex-col  md:text-base font-medium">
+                              <p>{data && data.user.email}</p>
+                              {userInfo && (
+                                <p>
+                                  Joined: {userInfo[0].date.slice(8, 10)}.
+                                  {userInfo[0].date.slice(5, 7)}.
+                                  {userInfo[0].date.slice(0, 4)}{" "}
+                                  {userInfo[0].date.slice(11, 16)}
+                                </p>
+                              )}
+                            </div>
                           </div>
-                        </div>
-                        <div className="border-2  border-primary/10 rounded-lg p-3 flex flex-col justify-center md:text-base font-semibold">
-                          <p>
-                            Finished workouts:{" "}
-                            {workoutsInfo && workoutsInfo.length}
-                          </p>
-                          <p>
-                            Average volume:{" "}
-                            {workoutsInfo &&
-                              averageVolume(workoutsInfo) + " kg"}
-                          </p>
-                        </div>
-                        <div className="col-span-2 p-3 border-2 border-primary/10">
-                          <Doughnut data={graphData} />
+                          <div className="border-2 border-primary/10 gap-4 rounded-lg p-3 flex items-center md:text-base font-semibold">
+                            <MdQueryStats className="text-4xl text-primary" />
+                            <div className="flex flex-col justify-center">
+                              <p>
+                                Finished workouts:{" "}
+                                {workoutsInfo && workoutsInfo.length}
+                              </p>
+                              <p>
+                                Average volume:{" "}
+                                {workoutsInfo &&
+                                  averageVolume(workoutsInfo) + " kg"}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="col-span-2 items-center justify-center flex  p-3 border-2 border-primary/10">
+                            <div className="w-full  sm:w-1/2 flex gap-2 flex-col ">
+                              <h3 className="text-2xl font-bold text-center">
+                                Your exercises
+                              </h3>
+                              <Doughnut data={graphData} />
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <ProfileLoader />
+                )}
               </motion.div>
             </AnimatePresence>
           )
