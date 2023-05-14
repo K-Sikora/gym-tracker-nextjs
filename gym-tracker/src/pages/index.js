@@ -86,7 +86,7 @@ const Index = () => {
   let numbers = /[0-9]/g;
 
   return (
-    <section className="flex min-h-screen w-full items-stretch">
+    <section className="flex min-h-screen w-full items-stretch ">
       {status === "unauthenticated" && (
         <div className="lg:w-1/2 text-white relative hidden lg:block cover  flex-grow">
           <div className="absolute top-0 left-0 w-full h-full bg-black/70"></div>
@@ -95,7 +95,7 @@ const Index = () => {
               options={{
                 strings: [
                   "Save your workouts",
-                  "Monitor your progress",
+                  "Track your progress",
                   "Add your own exercises",
                 ],
                 autoStart: true,
@@ -125,7 +125,7 @@ const Index = () => {
       {status === "authenticated" && <Dashboard />}
 
       {status === "unauthenticated" && (
-        <div className="md:w-1/2 bg-light w-full flex items-center justify-center min-h-[600px] flex-grow flex-col">
+        <div className="md:w-1/2 bg-light w-full flex items-center justify-center min-h-[800px] flex-grow flex-col">
           <AnimatePresence>
             {!registerVisible && (
               <motion.div
@@ -137,7 +137,7 @@ const Index = () => {
               >
                 <img
                   src="./logo.png"
-                  className="w-12 mb-4 self-center"
+                  className="w-16 mb-4 self-center"
                 ></img>
                 <h2 className="mb-6 text-center font-medium text-3xl">Login</h2>
                 <form
@@ -180,16 +180,15 @@ const Index = () => {
 
                   <button
                     type="submit"
-                    className="bg-primary hover:shadow-primary/60 duration-300 cursor-pointer text-white shadow-primary/40 rounded-full font-medium gap-2 flex relative items-center justify-center shadow-lg py-2 w-40 md:w-1/2 "
+                    className="bg-primary flex items-center justify-center hover:shadow-primary/60 duration-300 cursor-pointer text-white shadow-primary/40 rounded-full font-medium gap-2 h-10 shadow-lg py-2 w-40 md:w-1/2 "
                   >
-                    Sign In
-                    {loadingLogin && (
-                      <div className="absolute flex items-center justify-center top-1/2 right-5 md:right-8 -translate-y-1/2">
-                        <ClipLoader
-                          size={15}
-                          color="#eeeff1"
-                        />
-                      </div>
+                    {loadingLogin ? (
+                      <ClipLoader
+                        size={15}
+                        color="#eeeff1"
+                      />
+                    ) : (
+                      "Sign In"
                     )}
                   </button>
                 </form>
@@ -202,7 +201,7 @@ const Index = () => {
                       setRegisterVisible(true);
                       setPasswordRegister("");
                     }}
-                    className="text-black rounded-full font-medium border-2 border-primary py-2 w-40 md:w-1/2 "
+                    className="text-black rounded-full font-medium border-2 flex items-center justify-center h-10 border-primary py-2 w-40 md:w-1/2 "
                   >
                     Sign up
                   </button>
@@ -221,7 +220,7 @@ const Index = () => {
               >
                 <img
                   src="./logo.png"
-                  className="w-12 mb-4 self-center"
+                  className="w-16 mb-4 self-center"
                 ></img>
                 <h2 className="mb-6 text-center font-medium text-3xl">
                   Register
@@ -248,7 +247,8 @@ const Index = () => {
                   ></input>
                   <input
                     required
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    pattern="^(?=.*\d)(?=.*[A-Z]).{6,}$"
+                    title="The password must contain at least one number, one capital letter and be at least 6 characters long"
                     onChange={(e) => {
                       setPasswordRegister(e.target.value);
                     }}
@@ -335,16 +335,15 @@ const Index = () => {
                   <div className="w-full items-center justify-end flex ">
                     <button
                       type="submit"
-                      className="bg-primary relative cursor-pointer hover:shadow-primary/60 duration-300 text-white shadow-primary/40 rounded-full font-medium shadow-lg py-2 w-40 md:w-1/2 "
+                      className="bg-primary flex items-center justify-center cursor-pointer hover:shadow-primary/60 duration-300 text-white shadow-primary/40 rounded-full h-10  font-medium shadow-lg py-2 w-40 md:w-1/2 "
                     >
-                      Sign Up
-                      {loadingRegister && (
-                        <div className="absolute flex items-center justify-center top-1/2 right-5 md:right-8 -translate-y-1/2">
-                          <ClipLoader
-                            size={15}
-                            color="#eeeff1"
-                          />
-                        </div>
+                      {loadingRegister ? (
+                        <ClipLoader
+                          size={15}
+                          color="#eeeff1"
+                        />
+                      ) : (
+                        "Sign Up"
                       )}
                     </button>
                   </div>
@@ -358,7 +357,7 @@ const Index = () => {
                       setRegisterVisible(false);
                       setPasswordRegister("");
                     }}
-                    className="text-black rounded-full font-medium border-2 border-primary py-2 w-40 md:w-1/2 "
+                    className="text-black rounded-full font-medium border-2 flex items-center justify-center h-10 border-primary py-2 w-40 md:w-1/2 "
                   >
                     Sign in
                   </button>

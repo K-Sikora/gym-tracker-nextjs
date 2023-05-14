@@ -222,7 +222,7 @@ const Profile = (props) => {
                             <p>
                               Average volume:{" "}
                               {workoutsInfo &&
-                                averageVolume(workoutsInfo) + " kg"}
+                                averageVolume(workoutsInfo).toFixed(2) + " kg"}
                             </p>
                           </div>
                         </div>
