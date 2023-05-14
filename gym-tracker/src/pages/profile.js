@@ -19,9 +19,7 @@ const Profile = (props) => {
       const id = data.user.name;
       const response = await axios.get(`/api/getuserinfo/${id}`);
       return response.data;
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
   const router = useRouter();
   if (status === "unauthenticated") {
@@ -39,11 +37,8 @@ const Profile = (props) => {
       const id = data.user.name;
 
       const response = await axios.get(`/api/getworkouts/${id}`);
-      console.log(response.data);
       return response.data;
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
   const { data: workoutsInfo } = useQuery({
     queryKey: "workoutsInfo",
@@ -66,7 +61,6 @@ const Profile = (props) => {
 
   const getAllExercises = async () => {
     const response = await axios.get("/api/getexercises");
-    console.log(response.data);
     return response.data;
   };
 
@@ -107,7 +101,6 @@ const Profile = (props) => {
           }
         }
       });
-      console.log(result, "result");
       const array = [];
       const count = [];
       result.forEach((item) => {
