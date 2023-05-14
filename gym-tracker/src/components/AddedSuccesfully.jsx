@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const AddedSuccesfully = (props) => {
@@ -6,11 +7,11 @@ const AddedSuccesfully = (props) => {
       <h1 className="text-white text-center text-2xl font-semibold">
         Your workout has been added succesfully
       </h1>
-      <a href="/">
+      <Link href="/">
         <button className="text-white bg-primary rounded-full font-medium border-2 border-primary py-2 px-10  ">
           Return to dashboard
         </button>
-      </a>
+      </Link>
     </div>
   );
 };
