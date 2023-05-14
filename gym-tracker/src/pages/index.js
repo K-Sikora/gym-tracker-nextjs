@@ -35,7 +35,6 @@ const Index = () => {
           setLoadingRegister(false);
 
           setIsErrorRegister(false);
-          console.log("created successfully");
           router.reload();
         }
       } catch (error) {
@@ -44,7 +43,6 @@ const Index = () => {
 
           setIsErrorRegister(true);
         } else {
-          console.error("Error ocurred", error);
         }
       }
     }
@@ -59,7 +57,6 @@ const Index = () => {
       redirect: false,
     })
       .then((response) => {
-        console.log(response);
         if (response.ok) {
           //authenticate user
 
@@ -78,7 +75,6 @@ const Index = () => {
       })
       .catch((error) => {
         // handle errors
-        console.error(error);
       });
   };
   let lowerCaseLetters = /[a-z]/g;

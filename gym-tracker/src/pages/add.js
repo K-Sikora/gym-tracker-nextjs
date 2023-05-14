@@ -21,11 +21,8 @@ const Add = (props) => {
       const id = data.user.name;
 
       const response = await axios.get(`/api/getworkouts/${id}`);
-      console.log(response.data);
       return response.data;
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
   const { data: workoutsInfo, isFetchedAfterMount } = useQuery({
     queryKey: "workoutsInfo",
@@ -115,12 +112,23 @@ const Add = (props) => {
       if (!hasInvalidValue) {
         try {
           setloadingSubmit(true);
-          console.log(postData);
 
-          await axios.post("/api/addworkout", postData);
-          router.push("/");
+          const response = await axios.post("/api/addworkout", postData);
+          if (response.status === 200) {
+            router.push("/");
+          }
         } catch (error) {
-          console.error(error);
+          setloadingSubmit(false);
+          toast.error("Something went wrong, please try again later", {
+            position: "bottom-left",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       }
     } else {

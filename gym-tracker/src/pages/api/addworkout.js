@@ -28,7 +28,7 @@ export default async function (req, res) {
     });
 
     console.log(`Added workout with id ${workout.id}:`);
-    console.log(workout);
+    res.json(workout);
   } catch (error) {
     console.error(error);
   }
