@@ -39,3 +39,6 @@ body {
     -webkit-mask-position: -50%;
   }
 }
+input {
+  appearance: none;
+}

@@ -1,5 +1,7 @@
 import React, { useState, Fragment, useEffect } from "react";
 import ExerciseSet from "./ExerciseSet";
+import InputMask from "react-input-mask";
+
 import { Combobox, Transition } from "@headlessui/react";
 
 import { BiCheck, BiChevronUp } from "react-icons/bi";
@@ -159,13 +161,14 @@ const Exercise = (props) => {
           </div>
         </Combobox>
         <div className="flex gap-1 mb-2 justify-center  items-center">
-          <input
+          <InputMask
+            mask="9"
             onChange={(e) => {
               setcurrentSetsValue(e.target.value);
             }}
             placeholder="1"
             className="outline-none text-center focus:border-primary duration-300 w-12 rounded-md text-sm placeholder:text-gray-300 p-1 border-primary/90 border-2 bg-transparent"
-          ></input>
+          ></InputMask>
           <button
             onClick={(e) => {
               e.preventDefault();

@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar/Navbar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { BiPlus } from "react-icons/bi";
 import { useQuery } from "react-query";
@@ -14,6 +14,25 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddedSuccesfully from "@/components/AddedSuccesfully";
 const Add = (props) => {
+  const { status, data } = useSession();
+
+  const getWorkoutsInfo = async () => {
+    try {
+      const id = data.user.name;
+
+      const response = await axios.get(`/api/getworkouts/${id}`);
+      console.log(response.data);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const { data: workoutsInfo, isFetchedAfterMount } = useQuery({
+    queryKey: "workoutsInfo",
+    queryFn: getWorkoutsInfo,
+    refetchOnWindowFocus: false,
+    enabled: !!(status === "authenticated"),
+  });
   const getExercises = async () => {
     const results = await axios.get("/api/getexercises");
     return results.data;
@@ -23,7 +42,6 @@ const Add = (props) => {
     queryFn: getExercises,
     refetchOnWindowFocus: false,
   });
-  const { status, data } = useSession();
   const [loadingSubmit, setloadingSubmit] = useState(false);
   const router = useRouter();
   let exercises = [];
@@ -44,7 +62,17 @@ const Add = (props) => {
     router.push("/");
   }
 
-  const [workoutTitle, setworkoutTitle] = useState("My workout");
+  const [workoutTitle, setworkoutTitle] = useState("");
+  useEffect(() => {
+    if (workoutsInfo) {
+      if (workoutsInfo.length > 0) {
+        setworkoutTitle(`Workout #${workoutsInfo.length + 1}`);
+      } else {
+        setworkoutTitle("Workout #1");
+      }
+    }
+  }, [workoutsInfo]);
+
   const handleSubmitWorkout = async (e) => {
     e.preventDefault();
     if (workoutTitle.length > 0) {
@@ -138,7 +166,7 @@ const Add = (props) => {
                             value={workoutTitle}
                             onChange={(e) => {
                               const newValue = e.target.value;
-                              const regex = /^[a-zA-Z0-9\s]*$/;
+                              const regex = /^[a-zA-Z0-9\s#]*$/;
                               if (regex.test(newValue)) {
                                 setworkoutTitle(newValue);
                               }
