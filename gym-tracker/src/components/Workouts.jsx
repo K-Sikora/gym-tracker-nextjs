@@ -39,7 +39,7 @@ const Workouts = (props) => {
           {workouts && workouts.length === 0 ? (
             <div className="flex items-center justify-center flex-col gap-4">
               <h2 className=" text-2xl pt-10 text-white font-semibold">
-                You don't have any workouts
+                You don&apos;t have any workouts
               </h2>
               <Link href="/add">
                 <button className="text-xl  duration-1000 flex items-center group hover:text-dark justify-center gap-2 font-medium">
