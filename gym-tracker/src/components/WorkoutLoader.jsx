@@ -100,13 +100,6 @@ const WorkoutLoader = () => {
                 </SkeletonTheme>
               </div>
             </div>
-
-            <div className="w-full flex items-center justify-center">
-              <button className="flex flex-col items-center">
-                See more
-                <FiChevronDown className="text-2xl" />
-              </button>
-            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import Typewriter from "typewriter-effect";
 import axios from "axios";
+import { ClipLoader } from "react-spinners";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -10,6 +12,8 @@ const index = () => {
   const inputRef = useRef(null);
   const router = useRouter();
   const { status, data } = useSession();
+  const [loadingLogin, setLoadingLogin] = useState(false);
+  const [loadingRegister, setLoadingRegister] = useState(false);
   const [registerVisible, setRegisterVisible] = useState(false);
   const [isErrorRegister, setIsErrorRegister] = useState(false);
   const [isWrongPassword, setIsWrongPassword] = useState(false);
@@ -20,6 +24,7 @@ const index = () => {
   const [emailLogin, setEmailLogin] = useState("");
   const [passwordLogin, setPasswordLogin] = useState("");
   const handleRegister = async () => {
+    setLoadingRegister(true);
     if (passwordRegister2 === passwordRegister) {
       try {
         const response = await axios.post("/api/register", {
@@ -27,12 +32,16 @@ const index = () => {
           passwordRegister,
         });
         if (response.status === 201) {
+          setLoadingRegister(false);
+
           setIsErrorRegister(false);
           console.log("created successfully");
           router.reload();
         }
       } catch (error) {
         if (error.response && error.response.status === 409) {
+          setLoadingRegister(false);
+
           setIsErrorRegister(true);
         } else {
           console.error("Error ocurred", error);
@@ -42,6 +51,8 @@ const index = () => {
   };
 
   const handleLogin = async (e) => {
+    setLoadingLogin(true);
+
     const result = await signIn("credentials", {
       username: emailLogin,
       password: passwordLogin,
@@ -51,13 +62,16 @@ const index = () => {
         console.log(response);
         if (response.ok) {
           //authenticate user
-          // router.push("/dashboard");
+
+          router.push("/");
         }
         if (response.error === "Invalid Password") {
+          setLoadingLogin(false);
           setIsWrongEmail(false);
           setIsWrongPassword(true);
         }
         if (response.error === "Invalid E-mail") {
+          setLoadingLogin(false);
           setIsWrongEmail(true);
           setIsWrongPassword(false);
         }
@@ -72,9 +86,9 @@ const index = () => {
   let numbers = /[0-9]/g;
 
   return (
-    <section className="flex h-screen w-full   ">
+    <section className="flex min-h-screen w-full items-stretch">
       {status === "unauthenticated" && (
-        <div className="lg:w-1/2  text-white relative hidden lg:block  cover h-full flex-grow">
+        <div className="lg:w-1/2 text-white relative hidden lg:block cover  flex-grow">
           <div className="absolute top-0 left-0 w-full h-full bg-black/70"></div>
           <div className="z-50 absolute top-1/2 w-full font-semibold text-center   -translate-y-1/2 text-3xl ">
             <Typewriter
@@ -111,7 +125,7 @@ const index = () => {
       {status === "authenticated" && <Dashboard />}
 
       {status === "unauthenticated" && (
-        <div className="md:w-1/2 bg-light  w-full flex items-center justify-center h-full flex-grow flex-col ">
+        <div className="md:w-1/2 bg-light w-full flex items-center justify-center min-h-[600px] flex-grow flex-col">
           <AnimatePresence>
             {!registerVisible && (
               <motion.div
@@ -164,16 +178,20 @@ const index = () => {
                     </p>
                   )}
 
-                  <div className="w-full items-center justify-between flex ">
-                    <button className="font-normal text-base">
-                      Forgot password?
-                    </button>
-                    <input
-                      type="submit"
-                      value={"Sign in"}
-                      className="bg-primary hover:shadow-primary/60 duration-300 cursor-pointer text-white shadow-primary/40 rounded-full font-medium shadow-lg py-2 w-40 md:w-1/2 "
-                    ></input>
-                  </div>
+                  <button
+                    type="submit"
+                    className="bg-primary hover:shadow-primary/60 duration-300 cursor-pointer text-white shadow-primary/40 rounded-full font-medium gap-2 flex relative items-center justify-center shadow-lg py-2 w-40 md:w-1/2 "
+                  >
+                    Sign In
+                    {loadingLogin && (
+                      <div className="absolute flex items-center justify-center top-1/2 right-5 md:right-8 -translate-y-1/2">
+                        <ClipLoader
+                          size={15}
+                          color="#eeeff1"
+                        />
+                      </div>
+                    )}
+                  </button>
                 </form>
                 <div className="md:w-96 w-full flex items-center justify-between pt-8">
                   <button className="font-normal text-base">
@@ -315,11 +333,20 @@ const index = () => {
                   )}
 
                   <div className="w-full items-center justify-end flex ">
-                    <input
+                    <button
                       type="submit"
-                      value={"Sign up"}
-                      className="bg-primary cursor-pointer hover:shadow-primary/60 duration-300 text-white shadow-primary/40 rounded-full font-medium shadow-lg py-2 w-40 md:w-1/2 "
-                    ></input>
+                      className="bg-primary relative cursor-pointer hover:shadow-primary/60 duration-300 text-white shadow-primary/40 rounded-full font-medium shadow-lg py-2 w-40 md:w-1/2 "
+                    >
+                      Sign Up
+                      {loadingRegister && (
+                        <div className="absolute flex items-center justify-center top-1/2 right-5 md:right-8 -translate-y-1/2">
+                          <ClipLoader
+                            size={15}
+                            color="#eeeff1"
+                          />
+                        </div>
+                      )}
+                    </button>
                   </div>
                 </form>
                 <div className="md:w-96 w-full flex items-center justify-between pt-8">

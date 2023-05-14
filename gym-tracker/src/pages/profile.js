@@ -126,7 +126,7 @@ const profile = (props) => {
     labels: resultLabel && resultLabel.length > 0 ? resultLabel[0] : [],
     datasets: [
       {
-        label: "Occurrences",
+        label: "# in workouts",
         data: resultLabel && resultLabel.length > 0 ? resultLabel[1] : [],
         backgroundColor: [
           "rgba(83, 74, 168, 0.6)",
@@ -193,48 +193,45 @@ const profile = (props) => {
                 transition={{ duration: 1 }}
               >
                 {userInfo && workoutsInfo && allExercises ? (
-                  <div className="md:px-8">
-                    <div className="max-w-5xl mx-auto flex flex-col gap-4">
-                      <div className=" md:border-2 md:py-4 md:mt-10 rounded-sm border-primary/5">
-                        <div className="w-full md:px-4 md:grid  md:gap-2 md:grid-cols-2 text-white md:rounded-lg md:border-b-2  md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
-                          <div className="flex items-center gap-4 border-2  border-primary/10 rounded-lg p-3 justify-start">
-                            <span className="h-14 w-14 relative shadow-lg shadow-primary/10  flex items-center justify-center  rounded-full bg-primary pointer-events-none text-xl">
-                              {data &&
-                                data.user.email.slice(0, 1).toUpperCase()}
-                            </span>
-                            <div className="flex flex-col  md:text-base font-medium">
-                              <p>{data && data.user.email}</p>
-                              {userInfo && (
-                                <p>
-                                  Joined: {userInfo[0].date.slice(8, 10)}.
-                                  {userInfo[0].date.slice(5, 7)}.
-                                  {userInfo[0].date.slice(0, 4)}{" "}
-                                  {userInfo[0].date.slice(11, 16)}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                          <div className="border-2 border-primary/10 gap-4 rounded-lg p-3 flex items-center md:text-base font-semibold">
-                            <MdQueryStats className="text-4xl text-primary" />
-                            <div className="flex flex-col justify-center">
+                  <div className="max-w-5xl mx-auto flex flex-col gap-4">
+                    <div className=" md:border-2 md:py-4 md:mt-10 rounded-sm border-primary/5">
+                      <div className="w-full md:px-4 md:grid  md:gap-2 md:grid-cols-2 text-white md:rounded-lg md:border-b-2  md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
+                        <div className="flex items-center gap-4 border-2  border-primary/10 rounded-lg p-3 justify-start">
+                          <span className="w-12 h-12 md:h-14 md:w-14 relative shadow-lg shadow-primary/10  flex items-center justify-center  rounded-full bg-primary pointer-events-none text-xl">
+                            {data && data.user.email.slice(0, 1).toUpperCase()}
+                          </span>
+                          <div className="flex flex-col text-sm md:text-base font-medium">
+                            <p>{data && data.user.email}</p>
+                            {userInfo && (
                               <p>
-                                Finished workouts:{" "}
-                                {workoutsInfo && workoutsInfo.length}
+                                Joined: {userInfo[0].date.slice(8, 10)}.
+                                {userInfo[0].date.slice(5, 7)}.
+                                {userInfo[0].date.slice(0, 4)}{" "}
+                                {userInfo[0].date.slice(11, 16)}
                               </p>
-                              <p>
-                                Average volume:{" "}
-                                {workoutsInfo &&
-                                  averageVolume(workoutsInfo) + " kg"}
-                              </p>
-                            </div>
+                            )}
                           </div>
-                          <div className="col-span-2 items-center justify-center flex  p-3 border-2 border-primary/10">
-                            <div className="w-full  sm:w-1/2 flex gap-2 flex-col ">
-                              <h3 className="text-2xl font-bold text-center">
-                                Your exercises
-                              </h3>
-                              <Doughnut data={graphData} />
-                            </div>
+                        </div>
+                        <div className="border-2 border-primary/10 gap-4 rounded-lg p-3 flex items-center text-sm md:text-base font-semibold">
+                          <MdQueryStats className="w-12 h-12 md:h-14 md:w-14 text-primary" />
+                          <div className="flex flex-col justify-center">
+                            <p>
+                              Finished workouts:{" "}
+                              {workoutsInfo && workoutsInfo.length}
+                            </p>
+                            <p>
+                              Average volume:{" "}
+                              {workoutsInfo &&
+                                averageVolume(workoutsInfo) + " kg"}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="col-span-2 items-center justify-center flex  p-3 border-2 border-primary/10">
+                          <div className="w-full  sm:w-1/2 flex gap-2 flex-col ">
+                            <h3 className="text-2xl font-bold text-center">
+                              Your exercises
+                            </h3>
+                            <Doughnut data={graphData} />
                           </div>
                         </div>
                       </div>

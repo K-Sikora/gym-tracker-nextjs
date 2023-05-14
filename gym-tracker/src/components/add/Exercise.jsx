@@ -7,17 +7,6 @@ import { useQuery } from "react-query";
 import axios from "axios";
 
 const Exercise = (props) => {
-  const getExercises = async () => {
-    const results = await axios.get("/api/getexercises");
-    console.log(results.data);
-    return results.data;
-  };
-  const { data: exercises } = useQuery({
-    queryKey: "exercises",
-    queryFn: getExercises,
-    refetchOnWindowFocus: false,
-  });
-
   const [selected, setSelected] = useState({});
 
   const sets = [];
@@ -26,8 +15,8 @@ const Exercise = (props) => {
   const [query, setQuery] = useState("");
   const filteredExercises =
     query === ""
-      ? exercises
-      : exercises.filter((exercise) =>
+      ? props.exercises
+      : props.exercises.filter((exercise) =>
           exercise.exercise_name
             .toLowerCase()
             .replace(/\s+/g, "")
@@ -78,10 +67,10 @@ const Exercise = (props) => {
     );
   }
   useEffect(() => {
-    if (exercises && exercises.length > 0) {
-      setSelected(exercises[0]);
+    if (props.exercises && props.exercises.length > 0) {
+      setSelected(props.exercises[0]);
     }
-  }, [exercises]);
+  }, [props.exercises]);
 
   const [currentSetsValue, setcurrentSetsValue] = useState();
   return (

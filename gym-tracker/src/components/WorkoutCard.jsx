@@ -42,11 +42,11 @@ const WorkoutCard = (props) => {
           className="flex mt-4 justify-between"
         >
           <div className="flex gap-4 items-center">
-            <button className="h-8 w-8 relative shadow-lg shadow-primary/10  flex items-center justify-center  rounded-full bg-primary">
-              <p className="pointer-events-none font-bold text-xs md:text-sm flex items-center justify-center">
+            <span className="h-9 w-9 relative shadow-lg shadow-primary/10  flex items-center justify-center  rounded-full bg-primary">
+              <p className="pointer-events-none font-semibold text-sm md:text-base flex items-center justify-center">
                 {data && data.user.email.slice(0, 1).toUpperCase()}
               </p>
-            </button>
+            </span>
             <div className="flex gap-1 flex-col">
               <span className=" text-sm  font-medium">
                 {data && data.user.email}

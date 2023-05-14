@@ -5,6 +5,7 @@ import { RxDashboard } from "react-icons/rx";
 import { AiOutlineUser } from "react-icons/ai";
 import { HiOutlineLogout } from "react-icons/hi";
 import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 export default function Example() {
   const { data } = useSession();
   return (
@@ -28,7 +29,7 @@ export default function Example() {
       >
         <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="px-1 py-1 ">
-            <a href="/profile">
+            <Link href="/profile">
               <Menu.Item>
                 {({ active }) => (
                   <button
@@ -44,8 +45,8 @@ export default function Example() {
                   </button>
                 )}
               </Menu.Item>
-            </a>
-            <a href="/">
+            </Link>
+            <Link href="/">
               <Menu.Item>
                 {({ active }) => (
                   <button
@@ -61,7 +62,7 @@ export default function Example() {
                   </button>
                 )}
               </Menu.Item>
-            </a>
+            </Link>
             <Menu.Item>
               {({ active }) => (
                 <button

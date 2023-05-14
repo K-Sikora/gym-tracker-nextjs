@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { BiPlus } from "react-icons/bi";
+import { useQuery } from "react-query";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Loader from "@/components/Loader";
@@ -13,6 +14,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddedSuccesfully from "@/components/AddedSuccesfully";
 const add = (props) => {
+  const getExercises = async () => {
+    const results = await axios.get("/api/getexercises");
+    return results.data;
+  };
+  const { data: exercisesToComp } = useQuery({
+    queryKey: "exercisesToComp",
+    queryFn: getExercises,
+    refetchOnWindowFocus: false,
+  });
   const { status, data } = useSession();
   const [loadingSubmit, setloadingSubmit] = useState(false);
   const router = useRouter();
@@ -22,6 +32,7 @@ const add = (props) => {
   for (let i = 0; i < currentExercises; i++) {
     exercises.push(
       <Exercise
+        exercises={exercisesToComp}
         selectedExercise={selectedExercise}
         setSelectedExercise={setSelectedExercise}
         key={i}
@@ -106,7 +117,7 @@ const add = (props) => {
             <>
               <Navbar />
               <Layout>
-                {props.isLoading ? (
+                {props.isLoading || !exercisesToComp ? (
                   <Loader />
                 ) : (
                   <motion.div
