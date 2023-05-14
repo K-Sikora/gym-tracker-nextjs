@@ -20,7 +20,7 @@ const ExerciseSet = (props) => {
             }
           }}
           placeholder="12"
-          className="w-12 text-center text-sm placeholder:text-gray-300 pb-1 outline-none bg-transparent border-primary duration-300  border-b-2"
+          className="w-12 appearance-none rounded-none text-center text-sm placeholder:text-gray-300 pb-1 outline-none bg-transparent border-primary duration-300  border-b-2"
         ></input>
       </div>
 
@@ -41,7 +41,7 @@ const ExerciseSet = (props) => {
             }
           }}
           placeholder="KG"
-          className="w-12 text-center text-sm placeholder:text-gray-300 pb-1 outline-none bg-transparent border-primary duration-300  border-b-2"
+          className="w-12 appearance-none rounded-none text-center text-sm placeholder:text-gray-300 pb-1 outline-none bg-transparent border-primary duration-300  border-b-2"
         ></input>
       </div>
     </div>
