@@ -13,7 +13,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddedSuccesfully from "@/components/AddedSuccesfully";
-const add = (props) => {
+const Add = (props) => {
   const getExercises = async () => {
     const results = await axios.get("/api/getexercises");
     return results.data;
@@ -198,4 +198,4 @@ const add = (props) => {
   );
 };
 
-export default add;
+export default Add;

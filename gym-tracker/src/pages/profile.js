@@ -12,7 +12,7 @@ import { useQuery } from "react-query";
 import ProfileLoader from "@/components/ProfileLoader";
 import { MdQueryStats } from "react-icons/md";
 
-const profile = (props) => {
+const Profile = (props) => {
   const { status, data } = useSession();
   const getUserInfo = async () => {
     try {
@@ -249,4 +249,4 @@ const profile = (props) => {
   );
 };
 
-export default profile;
+export default Profile;

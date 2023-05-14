@@ -8,7 +8,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import Dashboard from "@/components/Dashboard";
-const index = () => {
+const Index = () => {
   const inputRef = useRef(null);
   const router = useRouter();
   const { status, data } = useSession();
@@ -372,4 +372,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
