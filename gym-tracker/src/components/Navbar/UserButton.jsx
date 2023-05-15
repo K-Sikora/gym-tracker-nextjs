@@ -7,6 +7,10 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 export default function Example() {
+  function getEmailUsername(email) {
+    const username = email.split("@")[0];
+    return username;
+  }
   const { data } = useSession();
   return (
     <Menu
@@ -27,7 +31,7 @@ export default function Example() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 mt-2 w-64 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="px-1 py-1 ">
             <Link href="/profile">
               <Menu.Item>
@@ -38,10 +42,10 @@ export default function Example() {
                     } w-full items-center text-black rounded-md px-2 py-2 text-sm hover:bg-primary hover:text-white duration-150`}
                   >
                     <AiOutlineUser
-                      className="mr-2 h-5 w-5"
+                      className="mr-2  h-5 w-5"
                       aria-hidden="true"
                     />
-                    {data && data.user.email}
+                    {data && getEmailUsername(data.user.email)}
                   </button>
                 )}
               </Menu.Item>

@@ -11,6 +11,8 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import ProfileLoader from "@/components/ProfileLoader";
 import { MdQueryStats } from "react-icons/md";
+import Link from "next/link";
+import { FaPlusCircle } from "react-icons/fa";
 
 const Profile = (props) => {
   const { status, data } = useSession();
@@ -220,11 +222,22 @@ const Profile = (props) => {
                           </div>
                         </div>
                         <div className="col-span-2 items-center justify-center flex  p-3 border-2 border-primary/10">
-                          <div className="w-full  sm:w-1/2 flex gap-2 flex-col ">
+                          <div className="w-full justify-center items-center sm:w-1/2 flex gap-2 flex-col ">
                             <h3 className="text-2xl font-bold text-center">
                               Your exercises
                             </h3>
-                            <Doughnut data={graphData} />
+                            {workoutsInfo && workoutsInfo.length > 0 ? (
+                              <Doughnut data={graphData} />
+                            ) : (
+                              <Link href="/add">
+                                <button className="text-xl  duration-1000 flex items-center group hover:text-dark justify-center gap-2 font-medium">
+                                  <FaPlusCircle className="text-primary" />
+                                  <span className="text-white effect-shine hover:text-primary transition-colors duration-1000">
+                                    Add your first workout
+                                  </span>
+                                </button>
+                              </Link>
+                            )}
                           </div>
                         </div>
                       </div>

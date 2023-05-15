@@ -26,7 +26,7 @@ const WorkoutLoader = () => {
                 height={32}
               />
             </SkeletonTheme>
-            <div className="flex gap-1 w-full flex-col">
+            <div className="flex  gap-1 w-full flex-col">
               <span className=" text-sm w-full font-medium">
                 <SkeletonTheme
                   baseColor="#030c20"
@@ -46,11 +46,11 @@ const WorkoutLoader = () => {
             </div>
           </div>
         </div>
-        <div className="mt-2 pt-2 md:border-t-2 gap-4 flex flex-col md:border-gray-300/10">
+        <div className="mt-2  pt-2 md:border-t-2 gap-4 flex flex-col md:border-gray-300/10">
           <div className="text-sm font-medium flex justify-between">
             <span className="">Workout summary</span>
           </div>
-          <div className="flex flex-wrap gap-4 ">
+          <div className="flex flex-col md:flex-row flex-wrap gap-4 ">
             <div className="flex flex-grow basis-1/4 bg-gradient-to-r shadow-sm shadow-primary/60 from-secondary to-dark md:bg-gradient-to-br px-4 py-3 rounded-lg gap-4">
               <SkeletonTheme
                 baseColor="#030c20"
