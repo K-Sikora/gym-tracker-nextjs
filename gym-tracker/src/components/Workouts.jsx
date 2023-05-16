@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FaPlusCircle } from "react-icons/fa";
 import WorkoutCard from "./WorkoutCard";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useQuery } from "react-query";
 import axios from "axios";
 
-import Loader from "./Loader";
 import WorkoutLoader from "./WorkoutLoader";
+import { PostAddSharp } from "@mui/icons-material";
 const Workouts = (props) => {
   const { status, data } = useSession();
 
@@ -40,10 +39,10 @@ const Workouts = (props) => {
                 You don&apos;t have any workouts
               </h2>
               <Link href="/add">
-                <button className="text-xl  duration-1000 flex items-center group hover:text-dark justify-center gap-2 font-medium">
-                  <FaPlusCircle className=" text-primary" />
-                  <span className="text-white effect-shine hover:text-primary transition-colors duration-1000">
-                    Add a workout
+                <button className="relative inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-primary to-blue-500 group-hover:from-primary hover:text-white text-white focus:ring-2 focus:outline-none ">
+                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75  bg-dark rounded-md group-hover:bg-opacity-0 flex items-center justify-center gap-2">
+                    <PostAddSharp fontSize="medium" />
+                    New workout
                   </span>
                 </button>
               </Link>

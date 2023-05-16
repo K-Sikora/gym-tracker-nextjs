@@ -13,6 +13,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddedSuccesfully from "@/components/AddedSuccesfully";
+
 const Add = (props) => {
   const { status, data } = useSession();
 
@@ -194,16 +195,20 @@ const Add = (props) => {
                           </button>
                           <button
                             onClick={handleSubmitWorkout}
-                            className="bg-primary hidden md:flex gap-2 self-center  items-center justify-center text-white py-2 px-4 rounded-lg"
+                            className="relative md:inline-flex  p-0.5  overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-primary to-blue-500 group-hover:from-primary hover:text-white text-white focus:ring-2 focus:outline-none bg-primary hidden  gap-2 self-center  items-center justify-center  "
                           >
-                            Submit workout
-                            <MdDownloadDone className="text-xl" />
+                            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-dark rounded-md group-hover:bg-opacity-0 flex items-center justify-center gap-2">
+                              Submit workout
+                              <MdDownloadDone className="text-xl" />
+                            </span>
                           </button>
                           <button
                             onClick={handleSubmitWorkout}
-                            className="bg-primary shadow-lg shadow-primary/20 flex items-center justify-center fixed md:hidden right-3 bottom-3 gap-2 self-center text-white h-12 w-12 rounded-full"
+                            className="bg-gradient-to-br shadow-md shadow-primary/20 flex items-center justify-center fixed md:hidden right-4 bottom-4 gap-2 self-center text-white group group-hover:from-primary from-primary to-blue-500 h-16 w-16 rounded-full"
                           >
-                            <MdDownloadDone className="text-2xl" />
+                            <span className="relative p-4 transition-all ease-in duration-75 bg-dark rounded-full group-hover:bg-opacity-0 flex items-center justify-center gap-2">
+                              <MdDownloadDone className="text-2xl" />
+                            </span>
                           </button>
                         </form>
                       </div>

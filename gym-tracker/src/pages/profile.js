@@ -12,7 +12,7 @@ import { useQuery } from "react-query";
 import ProfileLoader from "@/components/ProfileLoader";
 import { MdQueryStats } from "react-icons/md";
 import Link from "next/link";
-import { FaPlusCircle } from "react-icons/fa";
+import { PostAddSharp } from "@mui/icons-material";
 
 const Profile = (props) => {
   const { status, data } = useSession();
@@ -188,14 +188,14 @@ const Profile = (props) => {
                 transition={{ duration: 1 }}
               >
                 {userInfo && workoutsInfo && allExercises ? (
-                  <div className="max-w-5xl mx-auto flex flex-col gap-4">
+                  <div className="max-w-5xl  mx-auto flex flex-col gap-4">
                     <div className=" md:border-2 md:py-4 md:mt-10 rounded-sm border-primary/5">
-                      <div className="w-full md:px-4 md:grid  md:gap-2 md:grid-cols-2 text-white md:rounded-lg md:border-b-2  md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
+                      <div className="w-full flex flex-col gap-3 md:px-4 md:grid md:gap-2 md:grid-cols-2 text-white md:rounded-lg md:border-b-2  md:min-h-0 border-primary/20 md:border-none p-4 pb-7 md:p-0">
                         <div className="flex items-center gap-4 border-2  border-primary/10 rounded-lg p-3 justify-start">
                           <span className="w-12 h-12 md:h-14 md:w-14 relative shadow-lg shadow-primary/10  flex items-center justify-center  rounded-full bg-primary pointer-events-none text-xl">
                             {data && data.user.email.slice(0, 1).toUpperCase()}
                           </span>
-                          <div className="flex flex-col text-sm md:text-base font-medium">
+                          <div className="flex flex-col  text-sm md:text-base font-medium">
                             <p>{data && data.user.email}</p>
                             {userInfo && (
                               <p>
@@ -221,19 +221,19 @@ const Profile = (props) => {
                             </p>
                           </div>
                         </div>
-                        <div className="col-span-2 items-center justify-center flex  p-3 border-2 border-primary/10">
-                          <div className="w-full justify-center items-center sm:w-1/2 flex gap-2 flex-col ">
-                            <h3 className="text-2xl font-bold text-center">
-                              Your exercises
+                        <div className="col-span-2 items-center justify-center flex rounded-lg p-3 border-2 border-primary/10">
+                          <div className="w-full justify-center items-center sm:w-1/2 flex gap-4 flex-col ">
+                            <h3 className="text-xl md:text-2xl font-bold text-center">
+                              Exercise distribution
                             </h3>
                             {workoutsInfo && workoutsInfo.length > 0 ? (
                               <Doughnut data={graphData} />
                             ) : (
                               <Link href="/add">
-                                <button className="text-xl  duration-1000 flex items-center group hover:text-dark justify-center gap-2 font-medium">
-                                  <FaPlusCircle className="text-primary" />
-                                  <span className="text-white effect-shine hover:text-primary transition-colors duration-1000">
-                                    Add your first workout
+                                <button className="relative inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-primary to-blue-500 group-hover:from-primary hover:text-white text-white focus:ring-2 focus:outline-none ">
+                                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-dark rounded-md group-hover:bg-opacity-0 flex items-center justify-center gap-2">
+                                    <PostAddSharp fontSize="medium" />
+                                    New workout
                                   </span>
                                 </button>
                               </Link>

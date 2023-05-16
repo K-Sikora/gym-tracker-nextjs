@@ -111,7 +111,7 @@ const Exercise = (props) => {
               leaveTo="opacity-0"
               afterLeave={() => setQuery("")}
             >
-              <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 z-50 focus:outline-none sm:text-sm">
                 {filteredExercises &&
                 filteredExercises.length === 0 &&
                 query !== "" ? (
@@ -142,7 +142,7 @@ const Exercise = (props) => {
                           {selected ? (
                             <span
                               className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                active ? "text-white" : "text-dark"
+                                active ? "text-primary" : "text-dark"
                               }`}
                             >
                               <BiCheck
@@ -176,7 +176,7 @@ const Exercise = (props) => {
                 setcurrentSets(currentSetsValue);
               }
             }}
-            className="bg-primary font-medium rounded-md px-4 py-1 text-sm"
+            className="bg-primary font-medium rounded-md px-3 py-1 text-sm relative inline-flex items-center justify-center p-0.5  overflow-hidden  group bg-gradient-to-br from-primary to-blue-500 group-hover:from-primary hover:text-white text-white focus:ring-2 focus:outline-none"
           >
             Update sets
           </button>

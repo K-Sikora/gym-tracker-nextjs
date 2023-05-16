@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { MdSportsGymnastics } from "react-icons/md";
 import { useRouter } from "next/router";
-import { FaCalendarCheck, FaUser } from "react-icons/fa";
+import { FaCalendarCheck, FaUser, FaDumbbell } from "react-icons/fa";
 
-import { CgGym } from "react-icons/cg";
-import { FaCalendarPlus, FaUserAlt } from "react-icons/fa";
+import { FaCalendarPlus } from "react-icons/fa";
 import Link from "next/link";
 import UserButton from "./UserButton";
 const Navbar = () => {
@@ -38,6 +37,18 @@ const Navbar = () => {
                 Add
               </li>
             </Link>
+            <Link href="/exercises">
+              <li
+                className={`flex cursor-pointer hover:border-primary duration-300 justify-center items-center gap-2 text-base border-b-[3px] ${
+                  router.pathname === "/exercises"
+                    ? "border-primary "
+                    : "border-transparent"
+                } px-2 py-2`}
+              >
+                <FaDumbbell />
+                Exercises
+              </li>
+            </Link>
             <Link href="/profile">
               <li
                 className={`flex cursor-pointer ${
@@ -46,7 +57,7 @@ const Navbar = () => {
                     : "border-transparent"
                 } hover:border-primary  duration-300 justify-center items-center gap-2 text-base border-b-[3px]  px-2 py-2`}
               >
-                <FaUser className="text-lg" />
+                <FaUser />
                 Profile
               </li>
             </Link>
@@ -81,6 +92,20 @@ const Navbar = () => {
                   className={`
                   duration-300
                   ${router.pathname === "/add" ? "text-primary " : ""}
+                  
+                  `}
+                />
+              </li>
+            </Link>
+            <Link
+              className="hover:text-primary duration-300"
+              href="/exercises"
+            >
+              <li className="flex cursor-pointer  duration-300 justify-center items-center gap-2 text-base   px-2 py-2">
+                <FaDumbbell
+                  className={`
+                  duration-300
+                  ${router.pathname === "/exercises" ? "text-primary " : ""}
                   
                   `}
                 />
