@@ -58,7 +58,10 @@ const Exercises = (props) => {
                   </ul>
                   {standardExercises &&
                     standardExercises.map((exercise, index) => (
-                      <ul className="py-2 px-4 rounded-lg text-sm md:text-base font-medium odd:bg-dark/10 place-items-start  even:bg-dark/80 grid grid-cols-4 hover:bg-dark duration-150 gap-1 justify-between">
+                      <ul
+                        key={index}
+                        className="py-2 px-4 rounded-lg text-sm md:text-base font-medium odd:bg-dark/10 place-items-start  even:bg-dark/80 grid grid-cols-4 hover:bg-dark duration-150 gap-1 justify-between"
+                      >
                         <li>{index + 1}</li>
                         <li className="col-span-2">{exercise.exercise_name}</li>
                         <li>{exercise.muscle_group}</li>
