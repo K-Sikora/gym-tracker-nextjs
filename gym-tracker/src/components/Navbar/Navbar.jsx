@@ -1,33 +1,38 @@
-import React, { useState } from "react";
-import { MdSportsGymnastics } from "react-icons/md";
+import React from "react";
 import { useRouter } from "next/router";
 import { FaCalendarCheck, FaUser, FaDumbbell } from "react-icons/fa";
-
+import { motion } from "framer-motion";
 import { FaCalendarPlus } from "react-icons/fa";
 import Link from "next/link";
 import UserButton from "./UserButton";
 const Navbar = () => {
   const router = useRouter();
   return (
-    <header className="md:h-20 h-16 md:px-8 px-4 text-white flex w-full items-center justify-between bg-dark">
+    <header className="md:h-20 h-16 md:px-8 px-4 text-white flex w-full items-center  justify-between bg-[#030918]">
       <div className="max-w-5xl mx-auto w-full  flex gap-6 md:gap-7 items-center justify-between">
         <nav className="hidden md:flex items-center">
           <ul className="flex gap-7 text-base font-medium">
             <Link href="/">
-              <li
+              <motion.li
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                transition={{ delay: 0.5, duration: 1 }}
                 className={`flex cursor-pointer justify-center items-center gap-2 hover:border-primary ${
                   router.pathname === "/"
                     ? "border-primary "
                     : "border-transparent"
-                } duration-300 text-base border-b-[3px] px-2 py-2`}
+                } duration-300 transition-[border] text-base border-b-[3px] px-2 py-2`}
               >
                 <FaCalendarCheck />
                 Workouts
-              </li>
+              </motion.li>
             </Link>
             <Link href="/add">
-              <li
-                className={`flex cursor-pointer hover:border-primary duration-300 justify-center items-center gap-2 text-base border-b-[3px] ${
+              <motion.li
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                transition={{ delay: 0.6, duration: 1 }}
+                className={`flex cursor-pointer hover:border-primary duration-300 transition-[border] justify-center items-center gap-2 text-base border-b-[3px] ${
                   router.pathname === "/add"
                     ? "border-primary "
                     : "border-transparent"
@@ -35,11 +40,14 @@ const Navbar = () => {
               >
                 <FaCalendarPlus />
                 Add
-              </li>
+              </motion.li>
             </Link>
             <Link href="/exercises">
-              <li
-                className={`flex cursor-pointer hover:border-primary duration-300 justify-center items-center gap-2 text-base border-b-[3px] ${
+              <motion.li
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                transition={{ delay: 0.7, duration: 1 }}
+                className={`flex cursor-pointer hover:border-primary duration-300 transition-[border] justify-center items-center gap-2 text-base border-b-[3px] ${
                   router.pathname === "/exercises"
                     ? "border-primary "
                     : "border-transparent"
@@ -47,19 +55,22 @@ const Navbar = () => {
               >
                 <FaDumbbell />
                 Exercises
-              </li>
+              </motion.li>
             </Link>
             <Link href="/profile">
-              <li
+              <motion.li
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                transition={{ delay: 0.8, duration: 1 }}
                 className={`flex cursor-pointer ${
                   router.pathname === "/profile"
                     ? "border-primary "
                     : "border-transparent"
-                } hover:border-primary  duration-300 justify-center items-center gap-2 text-base border-b-[3px]  px-2 py-2`}
+                } hover:border-primary  duration-300 transition-[border] justify-center items-center gap-2 text-base border-b-[3px]  px-2 py-2`}
               >
                 <FaUser />
                 Profile
-              </li>
+              </motion.li>
             </Link>
           </ul>
         </nav>
@@ -67,66 +78,82 @@ const Navbar = () => {
         <nav className="flex items-center  md:hidden">
           <ul className="flex items-center gap-5 text-base font-medium">
             <Link
-              className="hover:text-primary duration-300"
+              className="hover:text-primary duration-300 transition-[border]"
               href="/"
             >
-              <li
+              <motion.li
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                transition={{ delay: 0.5, duration: 1 }}
                 className={`flex cursor-pointer justify-center items-center gap-2 text-base  px-2 py-2`}
               >
                 <FaCalendarCheck
                   className={`
-                duration-300
+                duration-300 transition-[color]
               ${router.pathname === "/" ? "text-primary " : ""}
               
               `}
                 />
-              </li>
+              </motion.li>
             </Link>
 
             <Link
-              className="hover:text-primary duration-300"
+              className="hover:text-primary duration-300 transition-[color]"
               href="/add"
             >
-              <li className="flex cursor-pointer  duration-300 justify-center items-center gap-2 text-base   px-2 py-2">
+              <motion.li
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                transition={{ delay: 0.6, duration: 1 }}
+                className="flex cursor-pointer  duration-300 transition-[color] justify-center items-center gap-2 text-base   px-2 py-2"
+              >
                 <FaCalendarPlus
                   className={`
-                  duration-300
+                  duration-300 transition-[color]
                   ${router.pathname === "/add" ? "text-primary " : ""}
                   
                   `}
                 />
-              </li>
+              </motion.li>
             </Link>
             <Link
-              className="hover:text-primary duration-300"
+              className="hover:text-primary duration-300 transition-[color]"
               href="/exercises"
             >
-              <li className="flex cursor-pointer  duration-300 justify-center items-center gap-2 text-base   px-2 py-2">
+              <motion.li
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                transition={{ delay: 0.7, duration: 1 }}
+                className="flex cursor-pointer  duration-300 transition-[border] justify-center items-center gap-2 text-base   px-2 py-2"
+              >
                 <FaDumbbell
                   className={`
-                  duration-300
+                  duration-300 transition-[border]
                   ${router.pathname === "/exercises" ? "text-primary " : ""}
                   
                   `}
                 />
-              </li>
+              </motion.li>
             </Link>
             <Link
-              className="hover:text-primary duration-300"
+              className="hover:text-primary duration-300 transition-[border]"
               href="/profile"
             >
-              <li
+              <motion.li
+                animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
+                transition={{ delay: 0.8, duration: 1 }}
                 className="flex cursor-pointer 
                             justify-center items-center gap-2 text-lg px-2 py-2"
               >
                 <FaUser
                   className={`
-                      duration-300
+                      duration-300 transition-[border]
                     ${router.pathname === "/profile" ? "text-primary " : ""}
                     
                     `}
                 />
-              </li>
+              </motion.li>
             </Link>
           </ul>
         </nav>

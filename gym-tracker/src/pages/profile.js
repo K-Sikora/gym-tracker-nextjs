@@ -6,13 +6,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import Loader from "@/components/Loader";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import GradientLayout from "@/components/GradientLayout";
 import axios from "axios";
 import { useQuery } from "react-query";
 import ProfileLoader from "@/components/ProfileLoader";
 import { MdQueryStats } from "react-icons/md";
 import Link from "next/link";
 import { PostAddSharp } from "@mui/icons-material";
+import Layout from "@/components/Layout";
 
 const Profile = (props) => {
   const { status, data } = useSession();
@@ -175,7 +175,7 @@ const Profile = (props) => {
   return (
     <div>
       <Navbar />
-      <GradientLayout>
+      <Layout>
         {props.isLoading ? (
           <Loader />
         ) : (
@@ -189,10 +189,10 @@ const Profile = (props) => {
               >
                 {userInfo && workoutsInfo && allExercises ? (
                   <div className="max-w-5xl  mx-auto flex flex-col gap-4">
-                    <div className=" md:border-2 md:py-4 md:mt-10 rounded-sm border-primary/5">
-                      <div className="w-full flex flex-col gap-3 md:px-4 md:grid md:gap-2 md:grid-cols-2 text-white md:rounded-lg md:border-b-2  md:min-h-0 border-primary/20 md:border-none p-4 pb-7 md:p-0">
+                    <div className=" md:py-4 md:mt-10 rounded-sm ">
+                      <div className="w-full flex flex-col gap-3 md:grid md:gap-2 md:grid-cols-2 text-white md:rounded-lg md:border-b-2  md:min-h-0 border-primary/20 md:border-none p-4 pb-7 md:p-0">
                         <div className="flex items-center gap-4 border-2  border-primary/10 rounded-lg p-3 justify-start">
-                          <span className="w-12 h-12 md:h-14 md:w-14 relative shadow-lg shadow-primary/10  flex items-center justify-center  rounded-full bg-primary pointer-events-none text-xl">
+                          <span className="w-12 h-12 md:h-14 md:w-14 relative shadow-md shadow-primary/10  flex items-center justify-center  rounded-full bg-primary pointer-events-none text-xl">
                             {data && data.user.email.slice(0, 1).toUpperCase()}
                           </span>
                           <div className="flex flex-col  text-sm md:text-base font-medium">
@@ -250,7 +250,7 @@ const Profile = (props) => {
             </AnimatePresence>
           )
         )}
-      </GradientLayout>
+      </Layout>
     </div>
   );
 };

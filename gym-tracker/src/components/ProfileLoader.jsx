@@ -31,8 +31,8 @@ const ProfileLoader = () => {
   const { width } = useWindowDimensions();
   return (
     <div className="max-w-5xl mx-auto flex flex-col gap-4">
-      <div className=" md:border-2 md:py-4 md:mt-10 rounded-sm border-primary/5">
-        <div className="w-full md:px-4 md:grid md:gap-2 md:grid-cols-2 text-white md:rounded-lg md:border-b-2 flex flex-col gap-3 md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
+      <div className=" md:py-4 md:mt-10 rounded-sm ">
+        <div className="w-full  md:grid md:gap-2 md:grid-cols-2 text-white md:rounded-lg md:border-b-2 flex flex-col gap-3 md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
           <div className="flex items-center gap-4 border-2  border-primary/10 rounded-lg p-3 justify-start">
             <SkeletonTheme
               baseColor="#030c20"

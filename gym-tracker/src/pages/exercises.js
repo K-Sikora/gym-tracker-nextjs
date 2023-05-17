@@ -1,6 +1,6 @@
-import GradientLayout from "@/components/GradientLayout";
 import Loader from "@/components/Loader";
 import Navbar from "@/components/Navbar/Navbar";
+import Layout from "@/components/Layout";
 import axios from "axios";
 import React, { useState } from "react";
 import AddToPhotosSharpIcon from "@mui/icons-material/AddToPhotosSharp";
@@ -29,22 +29,22 @@ const Exercises = (props) => {
   return (
     <div>
       <Navbar />
-      <GradientLayout>
+      <Layout>
         {props.isLading || loadingStandardExercises ? (
           <Loader />
         ) : (
           <div className="max-w-5xl mx-auto flex flex-col w-full gap-4">
-            <div className=" md:border-2 md:py-4 w-full md:mt-10 rounded-sm border-primary/5">
-              <div className="w-full md:px-4 flex flex-col  gap-3 text-white md:rounded-lg md:border-b-2  md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
+            <div className=" md:py-4 w-full md:mt-10 rounded-sm ">
+              <div className="w-full  flex flex-col  gap-3 text-white md:rounded-lg md:border-b-2  md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
                 <div className="border-2 rounded-lg border-primary/10 flex justify-between p-3 items-center">
-                  <p className="text-lg md:text-xl font-semibold">
+                  <p className="text-base md:text-xl font-semibold">
                     Available exercises
                   </p>
                   <button
                     onClick={() => setIsOpen(true)}
                     className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-primary to-blue-500 group-hover:from-primary hover:text-white text-white focus:ring-2 focus:outline-none "
                   >
-                    <span className="relative px-4 py-2 transition-all ease-in duration-75 bg-dark rounded-md group-hover:bg-opacity-0 flex items-center justify-center gap-2">
+                    <span className="relative md:px-4 px-3 py-1.5 md:py-2 transition-all ease-in duration-75 bg-dark rounded-md group-hover:bg-opacity-0 flex items-center justify-center gap-2">
                       <AddToPhotosSharpIcon fontSize="small" />
                       New exercise
                     </span>
@@ -79,7 +79,7 @@ const Exercises = (props) => {
             )}
           </div>
         )}
-      </GradientLayout>
+      </Layout>
     </div>
   );
 };

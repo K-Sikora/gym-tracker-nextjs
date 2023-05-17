@@ -62,24 +62,12 @@ const WorkoutCard = (props) => {
     : props.workout.exercises.slice(0, 2);
   const { data } = useSession();
   return (
-    <div className="w-full md:px-4   text-white">
-      <div className=" md:bg-gradient-to-tr from-dark to-secondary md:rounded-lg border-b-2  border-primary/20  md:border-none shadow-md shadow-black/10 p-4 py-7 md:p-5">
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.1 }}
-          className=" font-semibold text-xl"
-        >
-          {props.workout.name}
-        </motion.span>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.1 }}
-          className="flex mt-4 justify-between"
-        >
+    <div className="w-full text-white">
+      <div className="bg-transparent md:border-none border-b-2 shadow-sm shadow-primary/20 border-primary/10  p-4 py-7 md:p-5">
+        <span className=" font-semibold text-xl">{props.workout.name}</span>
+        <div className="flex mt-4 justify-between">
           <div className="flex gap-2 sm:gap-4 items-center">
-            <span className="h-8 w-8 sm:h-9 sm:w-9 relative shadow-lg shadow-primary/10  flex items-center justify-center  rounded-full bg-primary">
+            <span className="h-8 w-8 sm:h-9 sm:w-9 relative shadow-md shadow-primary/10  flex items-center justify-center  rounded-full bg-primary">
               <p className="pointer-events-none font-semibold text-sm md:text-base flex items-center justify-center">
                 {data && data.user.email.slice(0, 1).toUpperCase()}
               </p>
@@ -102,8 +90,8 @@ const WorkoutCard = (props) => {
           <div className="flex  flex-col gap-1 text-sm font-medium items-end ">
             <span>Volume: {calculateTotalVolume(props.workout)} kg</span>
           </div>
-        </motion.div>
-        <div className="mt-2 pt-2 md:border-t-2 gap-4 flex flex-col md:border-gray-300/10">
+        </div>
+        <div className="mt-2 pt-2 md:border-t-2 gap-4 flex flex-col md:border-gray-300/5">
           <div className="text-sm font-medium flex justify-between">
             <span className="">Workout summary</span>
           </div>

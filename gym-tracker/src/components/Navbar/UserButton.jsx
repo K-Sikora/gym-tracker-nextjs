@@ -18,7 +18,7 @@ export default function Example() {
       className="relative inline-block z-10 text-left"
     >
       <div>
-        <Menu.Button className="h-9 w-9 md:h-10  md:w-10 relative shadow-lg shadow-primary/20  flex items-center justify-center  rounded-full bg-primary">
+        <Menu.Button className="h-9 w-9 md:h-10  md:w-10 relative shadow-md shadow-primary/20  flex items-center justify-center  rounded-full bg-primary">
           {data && data.user.email.slice(0, 1).toUpperCase()}
         </Menu.Button>
       </div>

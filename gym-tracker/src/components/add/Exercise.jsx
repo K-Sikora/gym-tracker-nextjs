@@ -78,7 +78,7 @@ const Exercise = (props) => {
   return (
     <div
       data-exercise-id={props.exerciseNumber}
-      className="flex flex-col rounded-md p-2 py-4 bg-secondary shadow-md shadow-primary/5  "
+      className="flex flex-col rounded-md p-2 py-4 bg-transparent/20 shadow-md shadow-primary/5  "
     >
       <span className="text-base mb-4 font-medium  text-center">
         Exercise {props.exerciseNumber}
@@ -90,7 +90,7 @@ const Exercise = (props) => {
           onChange={setSelected}
         >
           <div className="relative mb-4">
-            <div className="relative w-full rounded-lg from-[#052651] to-secondary bg-gradient-to-bl shadow-md shadow-primary/20  md:bg-gradient-to-br cursor-default overflow-hidden  text-left  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+            <div className="relative w-full rounded-lg from-[#052651] to-secondary bg-gradient-to-bl   md:bg-gradient-to-br cursor-default overflow-hidden  text-left  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
               <Combobox.Input
                 className="w-full border-none py-2  pl-3 pr-10 text-sm leading-5 bg-transparent  text-white font-medium focus:ring-0"
                 displayValue={(exercise) => exercise.exercise_name}
