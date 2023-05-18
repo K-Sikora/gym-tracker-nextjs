@@ -31,7 +31,7 @@ const Workouts = (props) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
-          className="min-h-screen   md:mt-10 "
+          className="min-h-screen md:mt-4"
         >
           {workouts && workouts.length === 0 ? (
             <div className="flex items-center justify-center flex-col gap-4">
@@ -48,7 +48,7 @@ const Workouts = (props) => {
               </Link>
             </div>
           ) : (
-            <div className="flex md:py-4 md:rounded-lg flex-col md:gap-4  min-h-screen md:bg-transparent">
+            <div className="flex md:py-4 md:rounded-lg flex-col md:gap-10  min-h-screen md:bg-transparent">
               {workouts ? (
                 workouts.map((workout, index) => (
                   <WorkoutCard

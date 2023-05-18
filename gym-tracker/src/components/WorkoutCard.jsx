@@ -63,7 +63,7 @@ const WorkoutCard = (props) => {
   const { data } = useSession();
   return (
     <div className="w-full text-white">
-      <div className="bg-transparent md:border-none border-b-2 shadow-sm shadow-primary/20 border-primary/10  p-4 py-7 md:p-5">
+      <div className=" bg-primary/20 border-b-2 md:border-none border-primary/30 md:rounded-md p-4 py-7 md:p-5">
         <span className=" font-semibold text-xl">{props.workout.name}</span>
         <div className="flex mt-4 justify-between">
           <div className="flex gap-2 sm:gap-4 items-center">

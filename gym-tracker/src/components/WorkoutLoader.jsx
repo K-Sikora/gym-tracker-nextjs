@@ -5,7 +5,7 @@ import { FiChevronDown } from "react-icons/fi";
 const WorkoutLoader = () => {
   return (
     <div className="w-full text-white">
-      <div className=" h-screen md:h-auto bg-transparent md:border-none border-b-2 shadow-sm shadow-primary/20 border-primary/10  p-4 py-7 md:p-5">
+      <div className=" h-screen md:h-auto bg-primary/20 border-b-2 md:border-none border-primary/30 md:rounded-md  p-4 py-7 md:p-5">
         <span className=" font-semibold text-xl">
           <SkeletonTheme
             baseColor="#030c20"
@@ -51,7 +51,7 @@ const WorkoutLoader = () => {
             <span className="">Workout summary</span>
           </div>
           <div className="flex flex-col md:flex-row flex-wrap gap-4 ">
-            <div className="flex flex-grow basis-1/4  px-4 py-3 rounded-lg gap-4">
+            <div className="flex flex-grow basis-1/4 bg-gradient-to-r from-transparent/60 to-transparent/70 shadow-md shadow-black/40 px-4 py-3 rounded-lg gap-4 ">
               <SkeletonTheme
                 baseColor="#030c20"
                 highlightColor="#5C95FF"
