@@ -21,7 +21,9 @@ const Profile = (props) => {
       const id = data.user.name;
       const response = await axios.get(`/api/getuserinfo/${id}`);
       return response.data;
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
   const router = useRouter();
   if (status === "unauthenticated") {
@@ -131,7 +133,6 @@ const Profile = (props) => {
           "rgba(244, 232, 44, 0.6)",
           "rgba(244, 29, 142, 0.6)",
           "rgba(97, 252, 91, 0.6)",
-
           "rgba(34, 167, 1, 0.6)",
           "rgba(243, 45, 113, 0.6)",
           "rgba(213, 87, 197, 0.6)",
@@ -168,90 +169,100 @@ const Profile = (props) => {
           "rgba(57, 205, 103, 0.7)",
           "rgba(138, 130, 180, 0.7)",
         ],
-        borderWidth: 3,
+        borderWidth: 2,
       },
     ],
   };
   return (
-    <div>
-      <Navbar />
-      <Layout>
-        {props.isLoading ? (
-          <Loader />
-        ) : (
-          status === "authenticated" && (
-            <AnimatePresence>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-              >
-                {userInfo && workoutsInfo && allExercises ? (
-                  <div className="max-w-5xl  mx-auto flex flex-col gap-4">
-                    <div className=" md:py-4 md:mt-4 rounded-sm ">
-                      <div className="w-full flex flex-col gap-3 md:grid md:gap-2 md:grid-cols-2 text-white md:rounded-lg md:border-b-2  md:min-h-0 border-primary/20 md:border-none p-4 pb-7 md:p-0">
-                        <div className="flex items-center gap-4 border-2  border-primary/10 rounded-lg p-3 justify-start">
-                          <span className="w-12 h-12 md:h-14 md:w-14 relative shadow-md shadow-primary/10  flex items-center justify-center  rounded-full bg-primary pointer-events-none text-xl">
-                            {data && data.user.email.slice(0, 1).toUpperCase()}
-                          </span>
-                          <div className="flex flex-col  text-sm md:text-base font-medium">
-                            <p>{data && data.user.email}</p>
-                            {userInfo && (
-                              <p>
-                                Joined: {userInfo[0].date.slice(8, 10)}.
-                                {userInfo[0].date.slice(5, 7)}.
-                                {userInfo[0].date.slice(0, 4)}{" "}
-                                {userInfo[0].date.slice(11, 16)}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                        <div className="border-2 border-primary/10 gap-4 rounded-lg p-3 flex items-center text-sm md:text-base font-semibold">
-                          <MdQueryStats className="w-12 h-12 md:h-14 md:w-14 text-primary" />
-                          <div className="flex flex-col justify-center">
-                            <p>
-                              Finished workouts:{" "}
-                              {workoutsInfo && workoutsInfo.length}
-                            </p>
-                            <p>
-                              Average volume:{" "}
-                              {workoutsInfo &&
-                                averageVolume(workoutsInfo).toFixed(2) + " kg"}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="col-span-2 items-center justify-center flex rounded-lg p-3 border-2 border-primary/10">
-                          <div className="w-full justify-center items-center sm:w-1/2 flex gap-4 flex-col ">
-                            <h3 className="text-xl md:text-2xl font-bold text-center">
-                              Exercise distribution
-                            </h3>
-                            {workoutsInfo && workoutsInfo.length > 0 ? (
-                              <Doughnut data={graphData} />
-                            ) : (
-                              <Link href="/add">
-                                <button className="relative inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-primary to-blue-500 group-hover:from-primary hover:text-white text-white focus:ring-2 focus:outline-none ">
-                                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-dark rounded-md group-hover:bg-opacity-0 flex items-center justify-center gap-2">
-                                    <PostAddSharp fontSize="medium" />
-                                    New workout
-                                  </span>
-                                </button>
-                              </Link>
-                            )}
+    <>
+      {status === "loading" ? (
+        <Loader />
+      ) : status === "unauthenticated" ? (
+        ""
+      ) : (
+        <div>
+          <Navbar />
+          <Layout>
+            {props.isLoading ? (
+              <Loader />
+            ) : (
+              status === "authenticated" && (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                  >
+                    {userInfo && workoutsInfo && allExercises ? (
+                      <div className="max-w-5xl  mx-auto flex flex-col gap-4">
+                        <div className=" md:py-4 md:mt-4 rounded-sm ">
+                          <div className="w-full flex flex-col gap-3 md:grid md:gap-2 md:grid-cols-2 text-white md:rounded-lg md:border-b-2  md:min-h-0 border-gray-200/20  md:border-none p-4 pb-7 md:p-0">
+                            <div className="flex items-center gap-4 border-2  border-gray-200/20 rounded-lg p-3 justify-start">
+                              <span className="w-12 h-12 md:h-14 md:w-14 relative shadow-md shadow-primary/10  flex items-center justify-center  rounded-full bg-primary pointer-events-none text-xl">
+                                {data &&
+                                  data.user.email.slice(0, 1).toUpperCase()}
+                              </span>
+                              <div className="flex flex-col  text-sm md:text-base font-medium">
+                                <p>{data && data.user.email}</p>
+                                {userInfo && (
+                                  <p>
+                                    Joined: {userInfo[0].date.slice(8, 10)}.
+                                    {userInfo[0].date.slice(5, 7)}.
+                                    {userInfo[0].date.slice(0, 4)}{" "}
+                                    {userInfo[0].date.slice(11, 16)}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            <div className="border-2 border-gray-200/20 gap-4 rounded-lg p-3 flex items-center text-sm md:text-base font-semibold">
+                              <MdQueryStats className="w-12 h-12 md:h-14 md:w-14 text-primary" />
+                              <div className="flex flex-col justify-center">
+                                <p>
+                                  Finished workouts:{" "}
+                                  {workoutsInfo && workoutsInfo.length}
+                                </p>
+                                <p>
+                                  Average volume:{" "}
+                                  {workoutsInfo &&
+                                    averageVolume(workoutsInfo).toFixed(2) +
+                                      " kg"}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="col-span-2 items-center justify-center flex rounded-lg p-3 border-2 border-gray-200/20">
+                              <div className="w-5/6 justify-center items-center sm:w-1/2 flex gap-4 flex-col ">
+                                <h3 className="text-xl md:text-2xl font-bold text-center">
+                                  Exercise distribution
+                                </h3>
+                                {workoutsInfo && workoutsInfo.length > 0 ? (
+                                  <Doughnut data={graphData} />
+                                ) : (
+                                  <Link href="/add">
+                                    <button className="relative inline-flex items-center justify-center p-0.5  overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-primary to-blue-500 group-hover:from-primary hover:text-white text-white focus:ring-2 focus:outline-none ">
+                                      <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-dark rounded-md group-hover:bg-opacity-0 flex items-center justify-center gap-2">
+                                        <PostAddSharp fontSize="medium" />
+                                        New workout
+                                      </span>
+                                    </button>
+                                  </Link>
+                                )}
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                ) : (
-                  <ProfileLoader />
-                )}
-              </motion.div>
-            </AnimatePresence>
-          )
-        )}
-      </Layout>
-    </div>
+                    ) : (
+                      <ProfileLoader />
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              )
+            )}
+          </Layout>
+        </div>
+      )}
+    </>
   );
 };
 

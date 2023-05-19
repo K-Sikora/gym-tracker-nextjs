@@ -1,7 +1,7 @@
 import React from "react";
 const WorkoutCardExercise = (props) => {
   return (
-    <div className="flex  bg-gradient-to-r from-transparent/60 to-transparent/70 shadow-md shadow-black/40 px-4 py-3 rounded-lg gap-4">
+    <div className="flex items-center bg-gradient-to-r from-primary/20 to-primary/30 px-4 py-3 rounded-lg gap-4">
       <div className="rounded-full bg-gradient-to-bl from-gray-50 to-white  w-14 h-14 flex items-center justify-center">
         <img
           src="./exercise.png"

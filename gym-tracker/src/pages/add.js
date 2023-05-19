@@ -16,7 +16,23 @@ import AddedSuccesfully from "@/components/AddedSuccesfully";
 
 const Add = (props) => {
   const { status, data } = useSession();
+  const getUserExercises = async () => {
+    try {
+      const id = data.user.name;
 
+      const response = await axios.get(`/api/getuserexercises/${id}`);
+      console.log(response.data);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const { data: userExercises } = useQuery({
+    queryKey: "userExercises",
+    queryFn: getUserExercises,
+    enabled: !!(status === "authenticated"),
+    refetchOnWindowFocus: false,
+  });
   const getWorkoutsInfo = async () => {
     try {
       const id = data.user.name;
@@ -48,6 +64,7 @@ const Add = (props) => {
   for (let i = 0; i < currentExercises; i++) {
     exercises.push(
       <Exercise
+        userExercises={userExercises}
         exercises={exercisesToComp}
         selectedExercise={selectedExercise}
         setSelectedExercise={setSelectedExercise}
@@ -99,12 +116,11 @@ const Add = (props) => {
               {
                 position: "bottom-left",
                 autoClose: 2000,
-                hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
+                theme: "dark",
               }
             );
           }
@@ -123,119 +139,127 @@ const Add = (props) => {
           toast.error("Something went wrong, please try again later", {
             position: "bottom-left",
             autoClose: 2000,
-            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: "dark",
           });
         }
       }
     } else {
-      toast.error(`Invalid value for workout title`, {
+      toast.error(`Invalid workout title`, {
         position: "bottom-left",
         autoClose: 2000,
-        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "dark",
       });
     }
   };
 
   return (
-    <div className="md:pb-8 bg-gradient-to-r from-secondary to-dark">
-      {status === "authenticated" && (
+    <>
+      {status === "loading" ? (
+        <Loader />
+      ) : status === "unauthenticated" ? (
+        ""
+      ) : (
         <>
-          {!loadingSubmit ? (
-            <>
-              <Navbar />
-              <Layout>
-                {props.isLoading || !exercisesToComp ? (
-                  <Loader />
-                ) : (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="min-h-screen  md:py-4 md:mt-4 rounded-sm "
-                  >
-                    <div className="w-full text-white">
-                      <div className="md:rounded-lg border-b-2 min-h-screen md:min-h-0 border-primary/20  md:border-none p-4 pb-7 md:p-0">
-                        <form
-                          action="#"
-                          method="POST"
-                          className="mt-2 pt-2  gap-7 flex flex-col "
+          <div className="md:pb-8 bg-bgblack">
+            {status === "authenticated" && (
+              <>
+                {!loadingSubmit ? (
+                  <>
+                    <Navbar />
+                    <Layout>
+                      {props.isLoading || !exercisesToComp || !userExercises ? (
+                        <Loader />
+                      ) : (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                          className="min-h-screen  md:py-4 md:mt-4 rounded-sm "
                         >
-                          <input
-                            value={workoutTitle}
-                            onChange={(e) => {
-                              const newValue = e.target.value;
-                              const regex = /^[a-zA-Z0-9\s#]*$/;
-                              if (regex.test(newValue)) {
-                                setworkoutTitle(newValue);
-                              }
-                            }}
-                            className="bg-transparent caret-white text-white placeholder:text-gray-500 text-lg border-b-2 duration-300 outline-none font-semibold border-gray-400 focus:outline-none focus:border-primary py-1"
-                          ></input>
-                          {exercises}
-                          <button
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setcurrentExercises(currentExercises + 1);
-                            }}
-                            className="text-base font-medium gap-2 text-white self-center flex justify-center items-center"
-                          >
-                            Add next exercise
-                            <BiPlus className="text-lg" />
-                          </button>
-                          <button
-                            onClick={handleSubmitWorkout}
-                            className="relative md:inline-flex  p-0.5  overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-primary to-blue-500 group-hover:from-primary hover:text-white text-white focus:ring-2 focus:outline-none bg-primary hidden  gap-2 self-center  items-center justify-center  "
-                          >
-                            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-dark rounded-md group-hover:bg-opacity-0 flex items-center justify-center gap-2">
-                              Submit workout
-                              <MdDownloadDone className="text-xl" />
-                            </span>
-                          </button>
-                          <button
-                            onClick={handleSubmitWorkout}
-                            className="bg-gradient-to-br shadow-md shadow-primary/20 flex items-center justify-center fixed md:hidden right-4 bottom-4 gap-2 self-center text-white group group-hover:from-primary from-primary to-blue-500 h-16 w-16 rounded-full"
-                          >
-                            <span className="relative p-4 transition-all ease-in duration-75 bg-dark rounded-full group-hover:bg-opacity-0 flex items-center justify-center gap-2">
-                              <MdDownloadDone className="text-2xl" />
-                            </span>
-                          </button>
-                        </form>
-                      </div>
-                    </div>
-                  </motion.div>
+                          <div className="w-full text-white">
+                            <div className="md:rounded-lg border-b-2 min-h-screen md:min-h-0 border-primary/20 md:border-none  pb-7 md:p-0">
+                              <form
+                                action="#"
+                                method="POST"
+                                className="mt-4 md:mt-0 gap-7 flex flex-col "
+                              >
+                                <input
+                                  value={workoutTitle}
+                                  onChange={(e) => {
+                                    const newValue = e.target.value;
+                                    const regex = /^[a-zA-Z0-9\s#]*$/;
+                                    if (regex.test(newValue)) {
+                                      setworkoutTitle(newValue);
+                                    }
+                                  }}
+                                  className="bg-transparent mx-4 md:mx-0 caret-white text-white placeholder:text-gray-500 text-lg border-b-2 duration-300 outline-none font-semibold border-gray-400 focus:outline-none focus:border-primary py-1"
+                                ></input>
+                                {exercises}
+                                <button
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setcurrentExercises(currentExercises + 1);
+                                  }}
+                                  className="text-base font-medium gap-2 text-white self-center flex justify-center items-center"
+                                >
+                                  Add next exercise
+                                  <BiPlus className="text-lg" />
+                                </button>
+                                <button
+                                  onClick={handleSubmitWorkout}
+                                  className="relative md:inline-flex  p-0.5  overflow-hidden text-sm font-medium  rounded-lg group bg-gradient-to-br from-primary to-blue-500 group-hover:from-primary hover:text-white text-white focus:ring-2 focus:outline-none bg-primary hidden  gap-2 self-center  items-center justify-center  "
+                                >
+                                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-dark rounded-md group-hover:bg-opacity-0 flex items-center justify-center gap-2">
+                                    Submit workout
+                                    <MdDownloadDone className="text-xl" />
+                                  </span>
+                                </button>
+                                <button
+                                  onClick={handleSubmitWorkout}
+                                  className="bg-gradient-to-br shadow-md shadow-primary/20 flex items-center justify-center fixed md:hidden right-4 bottom-4 gap-2 self-center text-white group group-hover:from-primary from-primary to-blue-500 h-16 w-16 rounded-full"
+                                >
+                                  <span className="relative p-4 transition-all ease-in duration-75 bg-dark rounded-full group-hover:bg-opacity-0 flex items-center justify-center gap-2">
+                                    <MdDownloadDone className="text-2xl" />
+                                  </span>
+                                </button>
+                              </form>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </Layout>
+                  </>
+                ) : (
+                  <AddedSuccesfully workoutTitle={workoutTitle} />
                 )}
-              </Layout>
-            </>
-          ) : (
-            <AddedSuccesfully workoutTitle={workoutTitle} />
-          )}
+              </>
+            )}
+            {status === "unauthenticated" && <Loader />}
+            <ToastContainer
+              position="bottom-left"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
+          </div>
         </>
       )}
-      {status === "unauthenticated" && <Loader />}
-      <ToastContainer
-        position="bottom-left"
-        autoClose={2000}
-        hideProgressBar
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-    </div>
+    </>
   );
 };
 

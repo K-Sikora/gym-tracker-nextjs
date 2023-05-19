@@ -1,15 +1,14 @@
 import React from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { FiChevronDown } from "react-icons/fi";
 const WorkoutLoader = () => {
   return (
     <div className="w-full text-white">
-      <div className=" h-screen md:h-auto bg-primary/20 border-b-2 md:border-none border-primary/30 md:rounded-md  p-4 py-7 md:p-5">
+      <div className=" h-screen md:h-auto border-b-2 md:border-2 border-gray-200/20 shadow-md shadow-gray-400/10 md:rounded-xl  p-4 py-7 md:p-5">
         <span className=" font-semibold text-xl">
           <SkeletonTheme
             baseColor="#030c20"
-            highlightColor="#5C95FF"
+            highlightColor="#755ffa"
           >
             <Skeleton />
           </SkeletonTheme>
@@ -18,7 +17,7 @@ const WorkoutLoader = () => {
           <div className="flex gap-4 items-center w-full">
             <SkeletonTheme
               baseColor="#030c20"
-              highlightColor="#5C95FF"
+              highlightColor="#755ffa"
             >
               <Skeleton
                 circle
@@ -30,7 +29,7 @@ const WorkoutLoader = () => {
               <span className=" text-sm w-full font-medium">
                 <SkeletonTheme
                   baseColor="#030c20"
-                  highlightColor="#5C95FF"
+                  highlightColor="#755ffa"
                 >
                   <Skeleton />
                 </SkeletonTheme>
@@ -38,7 +37,7 @@ const WorkoutLoader = () => {
               <p className=" text-xs w-full font-medium">
                 <SkeletonTheme
                   baseColor="#030c20"
-                  highlightColor="#5C95FF"
+                  highlightColor="#755ffa"
                 >
                   <Skeleton />
                 </SkeletonTheme>
@@ -54,7 +53,7 @@ const WorkoutLoader = () => {
             <div className="flex flex-grow basis-1/4 bg-gradient-to-r from-transparent/60 to-transparent/70 shadow-md shadow-black/40 px-4 py-3 rounded-lg gap-4 ">
               <SkeletonTheme
                 baseColor="#030c20"
-                highlightColor="#5C95FF"
+                highlightColor="#755ffa"
               >
                 <Skeleton
                   circle
@@ -66,7 +65,7 @@ const WorkoutLoader = () => {
               <div className="flex flex-col text-xs  font-medium justify-center  ">
                 <SkeletonTheme
                   baseColor="#030c20"
-                  highlightColor="#5C95FF"
+                  highlightColor="#755ffa"
                 >
                   <Skeleton
                     width={100}

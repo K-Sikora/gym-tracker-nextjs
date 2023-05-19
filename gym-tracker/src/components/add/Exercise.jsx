@@ -1,9 +1,7 @@
 import React, { useState, Fragment, useEffect } from "react";
 import ExerciseSet from "./ExerciseSet";
 import InputMask from "react-input-mask";
-
 import { Combobox, Transition } from "@headlessui/react";
-
 import { BiCheck, BiChevronUp } from "react-icons/bi";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -15,10 +13,12 @@ const Exercise = (props) => {
   const [reps, setReps] = useState([]);
   const [weight, setWeight] = useState([]);
   const [query, setQuery] = useState("");
+  const exercisesCombined = props.exercises.concat(props.userExercises);
+
   const filteredExercises =
     query === ""
-      ? props.exercises
-      : props.exercises.filter((exercise) =>
+      ? exercisesCombined
+      : exercisesCombined.filter((exercise) =>
           exercise.exercise_name
             .toLowerCase()
             .replace(/\s+/g, "")
@@ -69,22 +69,22 @@ const Exercise = (props) => {
     );
   }
   useEffect(() => {
-    if (props.exercises && props.exercises.length > 0) {
-      setSelected(props.exercises[0]);
+    if (exercisesCombined && exercisesCombined.length > 0) {
+      setSelected(exercisesCombined[0]);
     }
-  }, [props.exercises]);
+  }, [props.exercises, props.userExercises]);
 
   const [currentSetsValue, setcurrentSetsValue] = useState();
   return (
     <div
       data-exercise-id={props.exerciseNumber}
-      className="flex flex-col rounded-md p-2 py-4 shadow-md shadow-primary/30"
+      className="flex flex-col border-b-2 p-4 md:p-2 md:py-6 py-4 md:border-2 border-gray-200/20 md:shadow-md shadow-gray-400/10 md:rounded-xl"
     >
       <span className="text-base mb-4 font-medium  text-center">
         Exercise {props.exerciseNumber}
       </span>
 
-      <div className="flex flex-col gap-3  rounded-md px-2">
+      <div className="flex flex-col gap-3  rounded-md md:px-2">
         <Combobox
           value={selected}
           onChange={setSelected}

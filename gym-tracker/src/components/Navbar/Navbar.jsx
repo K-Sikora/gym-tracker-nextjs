@@ -16,7 +16,7 @@ const Navbar = () => {
               <motion.li
                 animate={{ opacity: 1 }}
                 initial={{ opacity: 0 }}
-                transition={{ delay: 0.5, duration: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
                 className={`flex cursor-pointer justify-center items-center gap-2 hover:border-primary ${
                   router.pathname === "/"
                     ? "border-primary "
@@ -31,7 +31,7 @@ const Navbar = () => {
               <motion.li
                 animate={{ opacity: 1 }}
                 initial={{ opacity: 0 }}
-                transition={{ delay: 0.6, duration: 1 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
                 className={`flex cursor-pointer hover:border-primary duration-300 transition-[border] justify-center items-center gap-2 text-base border-b-[3px] ${
                   router.pathname === "/add"
                     ? "border-primary "
@@ -46,7 +46,7 @@ const Navbar = () => {
               <motion.li
                 animate={{ opacity: 1 }}
                 initial={{ opacity: 0 }}
-                transition={{ delay: 0.7, duration: 1 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
                 className={`flex cursor-pointer hover:border-primary duration-300 transition-[border] justify-center items-center gap-2 text-base border-b-[3px] ${
                   router.pathname === "/exercises"
                     ? "border-primary "
@@ -61,7 +61,7 @@ const Navbar = () => {
               <motion.li
                 animate={{ opacity: 1 }}
                 initial={{ opacity: 0 }}
-                transition={{ delay: 0.8, duration: 1 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
                 className={`flex cursor-pointer ${
                   router.pathname === "/profile"
                     ? "border-primary "
@@ -84,7 +84,7 @@ const Navbar = () => {
               <motion.li
                 animate={{ opacity: 1 }}
                 initial={{ opacity: 0 }}
-                transition={{ delay: 0.5, duration: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
                 className={`flex cursor-pointer justify-center items-center gap-2 text-base  px-2 py-2`}
               >
                 <FaCalendarCheck
@@ -104,7 +104,7 @@ const Navbar = () => {
               <motion.li
                 animate={{ opacity: 1 }}
                 initial={{ opacity: 0 }}
-                transition={{ delay: 0.6, duration: 1 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
                 className="flex cursor-pointer  duration-300 transition-[color] justify-center items-center gap-2 text-base   px-2 py-2"
               >
                 <FaCalendarPlus
@@ -123,7 +123,7 @@ const Navbar = () => {
               <motion.li
                 animate={{ opacity: 1 }}
                 initial={{ opacity: 0 }}
-                transition={{ delay: 0.7, duration: 1 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
                 className="flex cursor-pointer  duration-300 transition-[border] justify-center items-center gap-2 text-base   px-2 py-2"
               >
                 <FaDumbbell
@@ -142,7 +142,7 @@ const Navbar = () => {
               <motion.li
                 animate={{ opacity: 1 }}
                 initial={{ opacity: 0 }}
-                transition={{ delay: 0.8, duration: 1 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
                 className="flex cursor-pointer 
                             justify-center items-center gap-2 text-lg px-2 py-2"
               >
@@ -157,7 +157,13 @@ const Navbar = () => {
             </Link>
           </ul>
         </nav>
-        <UserButton />
+        <motion.div
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          transition={{ delay: 0.7, duration: 0.5 }}
+        >
+          <UserButton />
+        </motion.div>
       </div>
     </header>
   );

@@ -13,6 +13,7 @@ model User {
   password  String
   date         DateTime    @default(now())
   workouts  Workout[]
+  userExercises UserExercise[]
 }
 
 model Workout {
@@ -44,4 +45,12 @@ model ExerciseList {
   workout_id    Int       @id @default(autoincrement())
   exercise_name String    @db.VarChar(255) @unique
   muscle_group  String    @db.VarChar(255)
+}
+
+model UserExercise {
+  id           Int         @id @default(autoincrement())
+  exercise_name String      @unique
+  muscle_group String
+  user         User        @relation(fields: [userId], references: [id])
+  userId       Int
 }

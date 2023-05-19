@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { BiCheck, BiChevronUp } from "react-icons/bi";
@@ -11,8 +11,11 @@ const muscleGroups = [
   { name: "Arms" },
   { name: "Core" },
 ];
-const DropdownExercises = () => {
+const DropdownExercises = (props) => {
   const [selected, setSelected] = useState(muscleGroups[0]);
+  useEffect(() => {
+    props.setExerciseMuscle(selected);
+  }, [selected]);
   return (
     <div className="z-50 w-full">
       <Listbox
@@ -20,7 +23,7 @@ const DropdownExercises = () => {
         onChange={setSelected}
       >
         <div className="relative mt-1">
-          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-dark focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary text-base font-medium">
+          <Listbox.Button className="relative w-full font-medium cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-dark focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary text-base ">
             <span className="block truncate">{selected.name}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <BiChevronUp
