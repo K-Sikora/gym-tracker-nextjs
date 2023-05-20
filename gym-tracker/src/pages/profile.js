@@ -1,7 +1,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import Navbar from "@/components/Navbar/Navbar";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Loader from "@/components/Loader";
 import { useSession } from "next-auth/react";
@@ -50,6 +50,7 @@ const Profile = (props) => {
     refetchOnWindowFocus: false,
     enabled: !!(status === "authenticated"),
   });
+
   function averageVolume(workouts) {
     let volume = 0;
 
@@ -73,6 +74,31 @@ const Profile = (props) => {
     queryFn: getAllExercises,
     refetchOnWindowFocus: false,
   });
+  const getUserExercises = async () => {
+    try {
+      const id = data.user.name;
+      const response = await axios.get(`/api/getuserexercises/${id}`);
+      console.log(response.data);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const { data: userExercises } = useQuery({
+    queryKey: "userExercises",
+    queryFn: getUserExercises,
+    enabled: !!(status === "authenticated"),
+    refetchOnWindowFocus: false,
+  });
+
+  const [combinedExercises, setCombinedExercises] = useState([]);
+  useEffect(() => {
+    if (allExercises && allExercises.length > 0) {
+      setCombinedExercises(allExercises.concat(userExercises));
+    }
+  }, [userExercises, allExercises]);
+
   const passToGraph = (workouts, allExercises) => {
     if (
       workouts &&
@@ -116,7 +142,7 @@ const Profile = (props) => {
     }
   };
 
-  const resultLabel = passToGraph(workoutsInfo, allExercises);
+  const resultLabel = passToGraph(workoutsInfo, combinedExercises);
 
   ChartJS.register(ArcElement, Tooltip, Legend);
   const graphData = {

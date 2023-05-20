@@ -5,8 +5,9 @@ import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import DownloadDoneSharpIcon from "@mui/icons-material/DownloadDoneSharp";
 import DropdownExercises from "./DropdownExercises";
 import { ToastContainer, toast } from "react-toastify";
-
 import { useSession } from "next-auth/react";
+import Lottie from "lottie-react";
+import pushups from "../../public/pushups.json";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 const AddExercisePopup = (props) => {
@@ -154,13 +155,15 @@ const AddExercisePopup = (props) => {
                       onSubmit={postNewExercise}
                       method="post"
                       action="#"
-                      className="flex relative p-4 py-8 border- flex-col w-full rounded-lg  gap-6 items-center justify-center"
+                      className="flex relative p-4 py-4 -mt-10 border- flex-col w-full rounded-lg  gap-6 items-center justify-center"
                     >
-                      <div className="flex flex-col gap-2 items-center">
-                        <img
-                          src="./logo.png"
-                          className="w-16"
-                        ></img>
+                      <div className="flex flex-col items-center">
+                        <div className="w-40">
+                          <Lottie
+                            animationData={pushups}
+                            loop={true}
+                          />
+                        </div>
                         <h3 className="text-xl font-bold text-white sm:text-2xl">
                           Add new exercise
                         </h3>

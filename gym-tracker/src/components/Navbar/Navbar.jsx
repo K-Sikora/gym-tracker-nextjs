@@ -10,8 +10,20 @@ const Navbar = () => {
   return (
     <header className="md:h-20 h-16 md:px-8 px-4 text-white flex w-full items-center  justify-between bg-[#030918]">
       <div className="max-w-5xl mx-auto w-full  flex gap-6 md:gap-7 items-center justify-between">
-        <nav className="hidden md:flex items-center">
-          <ul className="flex gap-7 text-base font-medium">
+        <nav className="hidden md:flex gap-6 items-center">
+          <Link
+            className="hover:scale-105 shadow-primary duration-300"
+            href="/"
+          >
+            <motion.img
+              animate={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="w-11"
+              src="./logo.png"
+            ></motion.img>
+          </Link>
+          <ul className="flex gap-6 text-base font-medium">
             <Link href="/">
               <motion.li
                 animate={{ opacity: 1 }}
@@ -75,7 +87,19 @@ const Navbar = () => {
           </ul>
         </nav>
 
-        <nav className="flex items-center  md:hidden">
+        <nav className="flex gap-5 items-center  md:hidden">
+          <Link
+            className="hover:scale-105 shadow-primary duration-300"
+            href="/"
+          >
+            <motion.img
+              animate={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="w-8"
+              src="./logo.png"
+            ></motion.img>
+          </Link>
           <ul className="flex items-center gap-5 text-base font-medium">
             <Link
               className="hover:text-primary duration-300 transition-[border]"

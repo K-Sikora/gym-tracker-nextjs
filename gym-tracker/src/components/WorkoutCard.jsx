@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import WorkoutCardExercise from "./WorkoutCardExercise";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-import { motion } from "framer-motion";
+
 const WorkoutCard = (props) => {
   function getEmailUsername(email) {
     const username = email.split("@")[0];
@@ -63,7 +63,7 @@ const WorkoutCard = (props) => {
   const { data } = useSession();
   return (
     <div className="w-full text-white">
-      <div className="border-b-2 md:border-2 border-gray-200/20 shadow-md shadow-gray-400/10 md:rounded-xl p-4 py-7 md:p-5">
+      <div className="border-b-2 md:border-2 relative border-gray-200/20 shadow-md shadow-gray-400/10 md:rounded-xl p-4 py-7 md:p-5">
         <span className=" font-semibold text-xl">{props.workout.name}</span>
         <div className="flex mt-4 justify-between">
           <div className="flex gap-2 sm:gap-4 items-center">
