@@ -24,8 +24,8 @@ const Index = () => {
   const [emailLogin, setEmailLogin] = useState("");
   const [passwordLogin, setPasswordLogin] = useState("");
   const handleRegister = async () => {
-    setLoadingRegister(true);
     if (passwordRegister2 === passwordRegister) {
+      setLoadingRegister(true);
       try {
         const response = await axios.post("/api/register", {
           emailRegister,
@@ -45,6 +45,8 @@ const Index = () => {
         } else {
         }
       }
+    } else {
+      setLoadingRegister(false);
     }
   };
 
@@ -175,8 +177,11 @@ const Index = () => {
                   )}
 
                   <button
+                    disabled={loadingLogin}
                     type="submit"
-                    className="bg-primary flex items-center justify-center hover:shadow-primary/60 duration-300 cursor-pointer text-white shadow-primary/40 rounded-full font-medium gap-2 h-10 shadow-lg py-2 w-40 md:w-1/2 "
+                    className={`bg-primary ${
+                      loadingLogin ? "pointer-events-none" : ""
+                    } flex items-center justify-center hover:shadow-primary/60 duration-300 cursor-pointer text-white shadow-primary/40 rounded-full font-medium gap-2 h-10 shadow-lg py-2 w-40 md:w-1/2 `}
                   >
                     {loadingLogin ? (
                       <ClipLoader
@@ -330,8 +335,11 @@ const Index = () => {
 
                   <div className="w-full items-center justify-end flex ">
                     <button
+                      disabled={loadingRegister}
                       type="submit"
-                      className="bg-primary flex items-center justify-center cursor-pointer hover:shadow-primary/60 duration-300 text-white shadow-primary/40 rounded-full h-10  font-medium shadow-lg py-2 w-40 md:w-1/2 "
+                      className={`bg-primary ${
+                        loadingRegister ? "pointer-events-none" : ""
+                      } flex items-center justify-center cursor-pointer hover:shadow-primary/60 duration-300 text-white shadow-primary/40 rounded-full h-10  font-medium shadow-lg py-2 w-40 md:w-1/2 `}
                     >
                       {loadingRegister ? (
                         <ClipLoader

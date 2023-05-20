@@ -21,7 +21,6 @@ const Exercises = (props) => {
   const getStandardExercises = async () => {
     try {
       const response = await axios.get("/api/getexercises");
-      console.log(response.data);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -31,7 +30,6 @@ const Exercises = (props) => {
     const id = data.user.name;
     try {
       const response = await axios.get(`/api/getuserexercises/${id}`);
-      console.log(response.data);
       return response.data;
     } catch (err) {
       console.log(err);

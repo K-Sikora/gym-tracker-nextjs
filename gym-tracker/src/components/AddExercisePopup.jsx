@@ -42,7 +42,6 @@ const AddExercisePopup = (props) => {
             theme: "dark",
           });
         }
-        console.log(result);
       } catch (err) {
         console.log(err);
 
@@ -191,7 +190,7 @@ const AddExercisePopup = (props) => {
                             <span className="h-5 w-44 flex items-center justify-center">
                               <ClipLoader
                                 size={15}
-                                color="#755ffa"
+                                color="#010102"
                               />
                             </span>
                           ) : (

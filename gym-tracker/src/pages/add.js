@@ -15,13 +15,13 @@ import "react-toastify/dist/ReactToastify.css";
 import AddedSuccesfully from "@/components/AddedSuccesfully";
 
 const Add = (props) => {
+  const [addSuccess, setAddSuccess] = useState(false);
   const { status, data } = useSession();
   const getUserExercises = async () => {
     try {
       const id = data.user.name;
 
       const response = await axios.get(`/api/getuserexercises/${id}`);
-      console.log(response.data);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -132,7 +132,10 @@ const Add = (props) => {
 
           const response = await axios.post("/api/addworkout", postData);
           if (response.status === 200) {
-            router.push("/");
+            setAddSuccess(true);
+            setTimeout(() => {
+              router.push("/");
+            }, 2500);
           }
         } catch (error) {
           setloadingSubmit(false);
@@ -239,7 +242,10 @@ const Add = (props) => {
                     </Layout>
                   </>
                 ) : (
-                  <AddedSuccesfully workoutTitle={workoutTitle} />
+                  <AddedSuccesfully
+                    addSuccess={addSuccess}
+                    workoutTitle={workoutTitle}
+                  />
                 )}
               </>
             )}

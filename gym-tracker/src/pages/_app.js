@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
-import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
