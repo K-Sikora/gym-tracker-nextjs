@@ -20,7 +20,9 @@ const AddExercisePopup = (props) => {
   const postNewExercise = async (e) => {
     e.preventDefault();
     const id = data.user.name;
-    if (exerciseName.length > 2) {
+    const lettersOnly = exerciseName.replace(/\s/g, ""); // Usunięcie spacji z nazwy ćwiczenia
+    const containsMinimumLetters = lettersOnly.length >= 3;
+    if (containsMinimumLetters && exerciseName.length <= 50) {
       try {
         setLoadingResult(true);
         const result = await axios.post("/api/adduserexercise", {
@@ -74,19 +76,16 @@ const AddExercisePopup = (props) => {
         }
       }
     } else {
-      toast.error(
-        `Title must be at least 3 characters long. (Currently: ${exerciseName.length})`,
-        {
-          position: "bottom-left",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        }
-      );
+      toast.error(`Invalid exercise title.`, {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -94,7 +93,7 @@ const AddExercisePopup = (props) => {
   const handleChange = (e) => {
     const regex = /^[A-Za-z\s]{0,50}$/;
 
-    if (regex.test(e.target.value)) {
+    if (regex.test(e.target.value) && e.target.value.length < 50) {
       setValue(e.target.value);
       setexerciseName(e.target.value);
     }

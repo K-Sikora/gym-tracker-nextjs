@@ -251,8 +251,10 @@ const Profile = (props) => {
                                 <p>
                                   Average volume:{" "}
                                   {workoutsInfo &&
-                                    averageVolume(workoutsInfo).toFixed(2) +
-                                      " kg"}
+                                  averageVolume(workoutsInfo).toFixed(0) > 0
+                                    ? averageVolume(workoutsInfo).toFixed(0) +
+                                      " kg"
+                                    : "0 kg"}
                                 </p>
                               </div>
                             </div>

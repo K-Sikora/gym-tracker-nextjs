@@ -64,7 +64,11 @@ const WorkoutCard = (props) => {
   return (
     <div className="w-full text-white">
       <div className="border-b-2 md:border-2 relative border-gray-200/20 shadow-md shadow-gray-400/10 md:rounded-xl p-4 py-7 md:p-5">
-        <span className=" font-semibold text-xl">{props.workout.name}</span>
+        <span className=" font-semibold text-xl truncate">
+          {width < 650
+            ? truncateText(props.workout.name, 20)
+            : truncateText(props.workout.name, 45)}
+        </span>
         <div className="flex mt-4 justify-between">
           <div className="flex gap-2 sm:gap-4 items-center">
             <span className="h-8 w-8 sm:h-9 sm:w-9 relative shadow-md shadow-primary/10  flex items-center justify-center  rounded-full bg-primary">

@@ -201,7 +201,10 @@ const Add = (props) => {
                                   onChange={(e) => {
                                     const newValue = e.target.value;
                                     const regex = /^[a-zA-Z0-9\s#]*$/;
-                                    if (regex.test(newValue)) {
+                                    if (
+                                      regex.test(newValue) &&
+                                      newValue.length < 50
+                                    ) {
                                       setworkoutTitle(newValue);
                                     }
                                   }}
