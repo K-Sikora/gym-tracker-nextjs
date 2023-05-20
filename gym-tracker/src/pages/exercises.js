@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import ExercisesLoader from "@/components/ExercisesLoader";
 
 const Exercises = (props) => {
   const router = useRouter();
@@ -35,7 +36,11 @@ const Exercises = (props) => {
       console.log(err);
     }
   };
-  const { data: userExercises, refetch } = useQuery({
+  const {
+    data: userExercises,
+    refetch,
+    isLoading: loadingUserExercises,
+  } = useQuery({
     queryKey: "userExercises",
     queryFn: getUserExercises,
     refetchOnWindowFocus: false,
@@ -58,7 +63,7 @@ const Exercises = (props) => {
         <>
           <Navbar />
           <Layout>
-            {props.isLading || loadingStandardExercises ? (
+            {props.isLoading ? (
               <Loader />
             ) : (
               <div className="max-w-5xl mx-auto flex flex-col w-full gap-4">
@@ -84,22 +89,28 @@ const Exercises = (props) => {
                         <li className="col-span-2">Name</li>
                         <li>Muscle</li>
                       </ul>
-                      {standardExercises &&
-                        userExercises &&
-                        standardExercises
-                          .concat(userExercises)
-                          .map((exercise, index) => (
-                            <ul
-                              key={index}
-                              className="py-2 px-4 rounded-lg text-sm md:text-base font-medium odd:bg-dark/10 place-items-start  even:bg-dark/80 grid grid-cols-4 hover:bg-dark duration-150 gap-1 justify-between"
-                            >
-                              <li>{index + 1}</li>
-                              <li className="col-span-2">
-                                {exercise.exercise_name}
-                              </li>
-                              <li>{exercise.muscle_group}</li>
-                            </ul>
-                          ))}
+                      {loadingStandardExercises || loadingUserExercises ? (
+                        <ExercisesLoader />
+                      ) : (
+                        <>
+                          {standardExercises &&
+                            userExercises &&
+                            standardExercises
+                              .concat(userExercises)
+                              .map((exercise, index) => (
+                                <ul
+                                  key={index}
+                                  className="py-2 px-4 rounded-lg text-sm md:text-base font-medium odd:bg-dark/10 place-items-start  even:bg-dark/80 grid grid-cols-4 hover:bg-dark duration-150 gap-1 justify-between"
+                                >
+                                  <li>{index + 1}</li>
+                                  <li className="col-span-2">
+                                    {exercise.exercise_name}
+                                  </li>
+                                  <li>{exercise.muscle_group}</li>
+                                </ul>
+                              ))}
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
