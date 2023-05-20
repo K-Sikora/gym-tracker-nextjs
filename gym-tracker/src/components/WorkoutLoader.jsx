@@ -50,7 +50,7 @@ const WorkoutLoader = () => {
             <span className="">Workout summary</span>
           </div>
           <div className="flex flex-col md:flex-row flex-wrap gap-4 ">
-            <div className="flex flex-grow basis-1/4 bg-gradient-to-r from-transparent/60 to-transparent/70 shadow-md shadow-black/40 px-4 py-3 rounded-lg gap-4 ">
+            <div className="flex flex-grow basis-1/4 bg-gradient-to-r from-primary/20 to-primary/30 shadow-md shadow-black/40 px-4 py-3 rounded-lg gap-4 ">
               <SkeletonTheme
                 baseColor="#030c20"
                 highlightColor="#755ffa"

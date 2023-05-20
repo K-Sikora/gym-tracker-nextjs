@@ -90,7 +90,7 @@ const Exercise = (props) => {
           onChange={setSelected}
         >
           <div className="relative mb-4">
-            <div className="relative w-full rounded-lg from-[#052651] to-secondary bg-gradient-to-bl   md:bg-gradient-to-br cursor-default overflow-hidden  text-left  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+            <div className="relative w-full rounded-lg border-2 shadow-lg shadow-primary/20 border-primary/70 md:bg-gradient-to-br cursor-default overflow-hidden  text-left  focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2  sm:text-sm">
               <Combobox.Input
                 className="w-full border-none py-2  pl-3 pr-10 text-sm leading-5 bg-transparent  text-white font-medium focus:ring-0"
                 displayValue={(exercise) => exercise.exercise_name}
@@ -160,14 +160,15 @@ const Exercise = (props) => {
             </Transition>
           </div>
         </Combobox>
-        <div className="flex gap-1 mb-2 justify-center  items-center">
+        <div className="flex gap-2 justify-center  items-center">
           <InputMask
             mask="9"
             onChange={(e) => {
               setcurrentSetsValue(e.target.value);
             }}
             placeholder="1"
-            className="outline-none text-center focus:border-primary duration-300 w-12 rounded-md text-sm placeholder:text-gray-300 p-1 border-primary/90 border-2 bg-transparent"
+            className="outline-none rounded-sm text-center py-0.5 duration-300 w-12  text-sm placeholder:font-normal font-semibold placeholder:text-gray-400 px-1 border-gray-300
+            focus:border-primary border-2 bg-transparent"
           ></InputMask>
           <button
             onClick={(e) => {
@@ -176,7 +177,7 @@ const Exercise = (props) => {
                 setcurrentSets(currentSetsValue);
               }
             }}
-            className="bg-primary font-medium rounded-md px-3 py-1 text-sm relative inline-flex items-center justify-center p-0.5  overflow-hidden  group bg-gradient-to-br from-primary to-blue-500 group-hover:from-primary hover:text-white text-white focus:ring-2 focus:outline-none"
+            className="bg-primary font-medium rounded-sm px-2 py-1 text-sm relative inline-flex items-center justify-center p-0.5  overflow-hidden  group bg-gradient-to-br from-primary to-blue-500 group-hover:from-primary hover:text-white text-white focus:ring-2 focus:outline-none"
           >
             Update sets
           </button>

@@ -56,7 +56,11 @@ const ExerciseSet = (props) => {
           value={value}
           onChange={handleChange}
           placeholder="12"
-          className="w-12 appearance-none rounded-none text-center text-sm placeholder:text-gray-300 pb-1 outline-none bg-transparent border-primary duration-300 border-b-2"
+          className="w-12 appearance-none rounded-none text-center text-sm placeholder:text-gray-400 placeholder:font-normal font-semibold pb-1 outline-none bg-transparent 
+          border-gray-300
+focus:border-primary
+          
+          duration-300 border-b-2"
         />
       </div>
 
@@ -67,7 +71,8 @@ const ExerciseSet = (props) => {
           value={weight}
           onChange={handleWeightChange}
           placeholder="KG"
-          className="w-12 appearance-none rounded-none text-center text-sm placeholder:text-gray-300 pb-1 outline-none bg-transparent border-primary duration-300 border-b-2"
+          className="w-12 appearance-none rounded-none text-center text-sm placeholder:text-gray-400 placeholder:font-normal font-semibold pb-1 outline-none bg-transparent border-gray-300
+          focus:border-primary duration-300 border-b-2"
         />
       </div>
     </div>

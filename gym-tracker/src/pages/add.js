@@ -197,6 +197,7 @@ const Add = (props) => {
                               >
                                 <input
                                   value={workoutTitle}
+                                  placeholder="Workout title"
                                   onChange={(e) => {
                                     const newValue = e.target.value;
                                     const regex = /^[a-zA-Z0-9\s#]*$/;
@@ -204,7 +205,7 @@ const Add = (props) => {
                                       setworkoutTitle(newValue);
                                     }
                                   }}
-                                  className="bg-transparent mx-4 md:mx-0 caret-white text-white placeholder:text-gray-500 text-lg border-b-2 duration-300 outline-none font-semibold border-gray-400 focus:outline-none focus:border-primary py-1"
+                                  className="bg-transparent mx-4 md:mx-0 caret-white text-white placeholder:text-gray-400 text-lg border-b-2 duration-300 outline-none font-semibold border-gray-300 focus:outline-none focus:border-primary py-1"
                                 ></input>
                                 {exercises}
                                 <button
