@@ -2,12 +2,13 @@ import React, { useRef, useState } from "react";
 import Typewriter from "typewriter-effect";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
-
+import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import Dashboard from "@/components/Dashboard";
+
 const Index = () => {
   const inputRef = useRef(null);
   const router = useRouter();
@@ -60,8 +61,6 @@ const Index = () => {
     })
       .then((response) => {
         if (response.ok) {
-          //authenticate user
-
           router.push("/");
         }
         if (response.error === "Invalid Password") {
@@ -85,6 +84,9 @@ const Index = () => {
 
   return (
     <section className="flex min-h-screen w-full items-stretch ">
+      <Head>
+        <title>Gym Tracker</title>
+      </Head>
       {status === "unauthenticated" && (
         <div className="flex min-h-screen w-full cover items-stretch relative">
           <div className="absolute top-0 left-0 w-full h-full bg-black/80"></div>

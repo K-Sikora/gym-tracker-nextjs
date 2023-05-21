@@ -5,7 +5,7 @@ const ExerciseSet = (props) => {
 
   const handleChange = (e) => {
     const inputValue = e.target.value;
-    const numericValue = inputValue.replace(/[^0-9]/g, ""); // Usuwanie wszystkich znaków, które nie są cyframi
+    const numericValue = inputValue.replace(/[^0-9]/g, "");
 
     if (numericValue.length <= 2) {
       setValue(numericValue);
@@ -26,7 +26,7 @@ const ExerciseSet = (props) => {
 
   const handleWeightChange = (e) => {
     const inputValue = e.target.value;
-    const numericValue = inputValue.replace(/[^0-9]/g, ""); // Usuwanie wszystkich znaków, które nie są cyframi
+    const numericValue = inputValue.replace(/[^0-9]/g, "");
 
     if (numericValue.length <= 3) {
       setWeight(numericValue);

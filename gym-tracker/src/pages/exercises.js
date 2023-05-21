@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import ExercisesLoader from "@/components/ExercisesLoader";
+import Head from "next/head";
 
 const Exercises = (props) => {
   const router = useRouter();
@@ -55,6 +56,9 @@ const Exercises = (props) => {
 
   return (
     <div>
+      <Head>
+        <title>Add Exercise</title>
+      </Head>
       {status === "loading" ? (
         <Loader />
       ) : status === "unauthenticated" ? (

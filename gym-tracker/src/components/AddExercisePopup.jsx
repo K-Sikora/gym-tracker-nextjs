@@ -20,7 +20,7 @@ const AddExercisePopup = (props) => {
   const postNewExercise = async (e) => {
     e.preventDefault();
     const id = data.user.name;
-    const lettersOnly = exerciseName.replace(/\s/g, ""); // Usunięcie spacji z nazwy ćwiczenia
+    const lettersOnly = exerciseName.replace(/\s/g, "");
     const containsMinimumLetters = lettersOnly.length >= 3;
     if (containsMinimumLetters && exerciseName.length <= 50) {
       try {

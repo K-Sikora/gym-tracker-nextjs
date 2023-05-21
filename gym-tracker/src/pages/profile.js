@@ -13,7 +13,7 @@ import { MdQueryStats } from "react-icons/md";
 import Link from "next/link";
 import { PostAddSharp } from "@mui/icons-material";
 import Layout from "@/components/Layout";
-
+import Head from "next/head";
 const Profile = (props) => {
   const { status, data } = useSession();
   const getUserInfo = async () => {
@@ -78,7 +78,6 @@ const Profile = (props) => {
     try {
       const id = data.user.name;
       const response = await axios.get(`/api/getuserexercises/${id}`);
-      console.log(response.data);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -201,6 +200,9 @@ const Profile = (props) => {
   };
   return (
     <>
+      <Head>
+        <title>Profile</title>
+      </Head>
       {status === "loading" ? (
         <Loader />
       ) : status === "unauthenticated" ? (

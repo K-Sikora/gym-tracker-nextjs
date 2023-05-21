@@ -13,7 +13,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddedSuccesfully from "@/components/AddedSuccesfully";
-
+import Head from "next/head";
 const Add = (props) => {
   const [addSuccess, setAddSuccess] = useState(false);
   const { status, data } = useSession();
@@ -90,7 +90,7 @@ const Add = (props) => {
 
   const handleSubmitWorkout = async (e) => {
     e.preventDefault();
-    if (workoutTitle.length > 0) {
+    if (workoutTitle.trim().length > 0) {
       const userId = data.user.name;
       const postData = {
         workoutTitle,
@@ -165,6 +165,9 @@ const Add = (props) => {
 
   return (
     <>
+      <Head>
+        <title>Add Workout</title>
+      </Head>
       {status === "loading" ? (
         <Loader />
       ) : status === "unauthenticated" ? (
