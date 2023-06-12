@@ -2,6 +2,8 @@
 
 Gym Tracker is a web application built with Next.js that allows users to track their workouts, add their own exercises, and create an account. It uses Tailwind CSS for styling, NextAuth for authentication, PostgreSQL as the database, and Prisma as the ORM.
 
+![FireShot Capture 041 - Gym Tracker - gym-tracker-nextjs vercel app](https://github.com/K-Sikora/gym-tracker-nextjs/assets/105585380/65424f87-cbde-460e-84a7-b4b65545e43c)
+
 ## Demo
 
 Check out the [live demo](https://gym-tracker-nextjs.vercel.app/) of the Gym Tracker application.
